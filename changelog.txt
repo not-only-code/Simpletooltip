@@ -1,0 +1,36 @@
+ 
+TODO:
+
++ can add custom themes on the fly (colors, arrows, landmark icons)
++ add easing functions
++ possibility to add settings params at initialize plugin (width max, height max, add custom theme, position...)
++ add your own fonts
+
+
+v 1.2 (01.02.2011)
+
++ Simpletooltip Logo!
++ new 4 color designs: seablue(default), pastelblue, darkgray, lightgray
++ all new positions (top, top-right, right-top, right, right-bottom, bottom-right, bottom, bottom-left, left-bottom, left, left-top, top-left)
++ new landmark icon design
++ optimized code
++ changed css structure
++ added .js and .css compressed versions
++ scrolling bugs fixed
+
+
+v 1.1 (03.06.2010)
+
++ 7 new positions ( top , right-top , right , right-bottom , bottom, left-bottom, left, left-top) 
++ icon markup in the target
++ short delay to launch
++ bugs fixed
+
+
+v 1.0 (19.05.2010)
+
++ blue-white color version ( with fine shadow box css made)
++ One position: top
++ easy implementation only by css
++ attribute "title" benefits
++ crossbrowser compatible
