@@ -57,7 +57,7 @@ html {
 body{
 	height: auto;
 	color: #555;
-	font: italic 12px/14px Georgia, Times, Serif;
+	font: italic 13px/1.2em Georgia, Times, Serif;
 	background: #bfc9d5;
 	background: -webkit-gradient(linear, left top, left bottom, from(#bfc9d5), to(#e5e9ee));
 	background: -moz-linear-gradient(top,  #bfc9d5,  #e5e9ee);
@@ -70,20 +70,18 @@ h1,h2,h3,h4 {
 	font-style: normal;
 	font-size: 3.5em;
 	line-height: 1em;
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 	color: white;
-	text-shadow: 1px 1px 1px rgba(0,0,0,.6);
 }
 
 a:link,
 a:active,
 a:visited {
 	color: #4baa00;
-	text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline
+	color: #977400;
 }
 
 h2 a:link,
@@ -91,26 +89,35 @@ h2 a:active,
 h2 a:hover,
 h2 a:visited {
 	text-decoration: none;
-	color: #7db72f;
+	color: #6a9f22;
 	
 }
 
 p, li {
+	margin-left: 0;
+	margin-right: 0;
 	font-size: 1.2em;
-	line-height: 1.4em;
+	line-height: 1.5em;
 }
 
-p, code, .example {
-	margin: 0 20px;
-	margin-bottom: 20px;
+p,
+code,
+.example,
+.download {
+	margin: 0 15px;
+	margin-bottom: 25px;
+	text-shadow: rgba(255, 255, 255, 0.7) 0px 1px 0px;
 }
 
-code, .example {
+code,
+.example,
+.download {
+	font-style: normal;
 	position: relative;
 	display: block;
 	padding: 20px;
 	background-color: #dfdbc3;
-	color: #88795f;
+	color: #6e614d;
 	border: dashed 1px #88795f;
 	-webkit-border-radius: .5em;
 	-moz-border-radius: .5em;
@@ -118,9 +125,21 @@ code, .example {
 	overflow: hidden;
 }
 
+code {
+	text-shadow: none;
+}
+
 .example {
 	background-color: #d4d5e0;
 	border-color: #8488a6;
+}
+
+.download {
+	background-image: url(./images/download-background.png);
+}
+
+.download p {
+	margin-bottom: 10px;
 }
 
 em {
@@ -151,7 +170,7 @@ strong {
 	font: 2.2em/.3em BrushScriptStdMedium, Helvetica, Arial, sans-serif;
 	padding: .5em 2em .55em;
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	opacity: .6;
+	opacity: .7;
 	
 	-webkit-border-radius: .3em; 
 	-moz-border-radius: .3em;
@@ -272,7 +291,7 @@ a.button:visited {
 	top: 0;
 	right: 0;
 	width: 210px;
-	height: 230px;
+	height: auto;
 	margin-right: 20px;
 	padding: 20px;
 	-webkit-border-radius: .8em; 
@@ -286,6 +305,7 @@ a.button:visited {
 	-webkit-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
 	-moz-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
 	box-shadow:inset 0 1px 4px rgba(0,0,0,.3);
+	overflow: hidden;
 }
 
 #downloadpanel .button {
@@ -300,6 +320,10 @@ a.button:visited {
 	margin-bottom: 10px;
 	
 	text-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px;
+}
+
+#downloadpanel .button.blue {
+	margin-bottom: 0;
 }
 
 /*------------- content -------------*/
@@ -350,12 +374,11 @@ ul li {
 }
 
 .features ul {
-	color: #88805f;
+	color: #6d7988;
 	float: left;
 	clear: left;
-	font-size: 1.2em;
-	line-height: 1.2em;
-	text-shadow: rgba(255, 255, 255, 1) 0px 1px 0px;
+	font: bold 1.25em/1.45em Helvetica, Arial, Sans-serif;
+	text-shadow: rgba(255, 255, 255, .8) 0px 1px 0px;
 }
 
 .features-image {
@@ -369,11 +392,18 @@ ul li {
 	float: left;
 	width: 100px;
 	height: 100px;
-	line-height: 8em;
+	font: bold 1em/8em Helvetica, Arial, Sans-serif;
 	text-align: center;
+	color: #6d7988;
 	margin-right: 10px;
 	background: #fff;
 	overflow: hidden;
+	margin-right: 20px;
+}
+
+.example .small-area.last-child,
+.example .small-area:last-child {
+	margin-right: 0;
 }
 
 .example h1 {
