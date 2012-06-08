@@ -1,0 +1,390 @@
+/* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
+-------------------------------------------------------------- */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	background: transparent;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+body {
+	line-height: 1;
+}
+h1, h2, h3, h4, h5, h6 {
+	clear: both;
+	font-weight: normal;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote {
+	quotes: none;
+}
+blockquote:before, blockquote:after {
+	content: '';
+	content: none;
+}
+del {
+	text-decoration: line-through;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a img {
+	border: none;
+}
+
+/* General Styles
+-------------------------------------------------------------- */
+
+html {
+	height: 100%;
+	min-height: 100%;
+	background: #bfc9d5;
+}
+
+body{
+	height: auto;
+	color: #555;
+	font: italic 12px/14px Georgia, Times, Serif;
+	background: #bfc9d5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#bfc9d5), to(#e5e9ee));
+	background: -moz-linear-gradient(top,  #bfc9d5,  #e5e9ee);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#bfc9d5', endColorstr='#e5e9ee');
+}
+
+h1,h2,h3,h4 {
+	display: inline-block;
+	font-family: BrushScriptStdMedium;
+	font-style: normal;
+	font-size: 3.5em;
+	line-height: 1em;
+	margin-bottom: 20px;
+	color: white;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+}
+
+a:link,
+a:active,
+a:visited {
+	color: #4baa00;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline
+}
+
+h2 a:link,
+h2 a:active,
+h2 a:hover,
+h2 a:visited {
+	text-decoration: none;
+	color: #7db72f;
+	
+}
+
+p, li {
+	font-size: 1.2em;
+	line-height: 1.4em;
+}
+
+p, code, .example {
+	margin: 0 20px;
+	margin-bottom: 20px;
+}
+
+code, .example {
+	position: relative;
+	display: block;
+	padding: 20px;
+	background-color: #dfdbc3;
+	color: #88795f;
+	border: dashed 1px #88795f;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	overflow: hidden;
+}
+
+.example {
+	background-color: #d4d5e0;
+	border-color: #8488a6;
+}
+
+em {
+	font-style: italic;
+	color: #0085bc;
+}
+
+strong {
+	font-weight: bold;
+	font-style: italic;
+}
+
+/*------------ buttons --------------*/
+
+.button,
+.button:link {
+	
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	margin-bottom: 10px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 2.2em/.3em BrushScriptStdMedium, Helvetica, Arial, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	opacity: .6;
+	
+	-webkit-border-radius: .3em; 
+	-moz-border-radius: .3em;
+	border-radius: .3em;
+	/*
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	*/
+}
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+}
+
+a.button:link,
+a.button:active,
+a.button:visited {
+	color: white;
+}
+	
+
+/* blue */
+
+
+.blue,
+.blue:visited {
+	border: solid 1px #0076a3;
+	background: #0095cd;
+	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+}
+.blue:hover {
+	background: #007ead;
+	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+	background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095cc', endColorstr='#00678e');
+}
+.blue:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
+	background: -moz-linear-gradient(top,  #0078a5,  #00adee);
+}
+
+
+/* green */
+
+.green,
+.green:visited {
+	border: solid 1px #538312;
+	background: #64991e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+	background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+}
+.green:hover {
+	background: #538018;
+	background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+	background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+}
+.green:active {
+	color: white;
+	background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e), to(#7db72f));
+	background: -moz-linear-gradient(top,  #4e7d0e,  #7db72f);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
+}
+
+/* Structure Styles
+-------------------------------------------------------------- */
+
+#header {
+	height: 150px;
+	background-color: #6d7988;
+	color: #eaeaea;
+	margin-bottom: 40px;
+}
+
+#header .wrapper,
+#section {
+	width: 800px;
+	margin: 0 auto;
+	height: 200px;
+}
+
+#header h1 {
+	display: inline-block;
+	margin: 60px 0 20px 0;
+	padding-right: 5px;
+	padding-left: 90px;
+	font-size: 4.2em;
+	color: #e8f3f6;
+	line-height: 1.5em;
+	text-shadow: 1px 3px 1px rgba(0,0,0,.4);
+	background: url(./images/simpletooltip-logo.png) no-repeat 0 10px;
+}
+
+#header a.jquery {
+	display: block;
+	width: auto;
+	height: auto;
+	overflow: hidden;
+	float: right;
+	margin: 20px 20px 0 0;
+}
+
+#section {
+	position: relative;
+	height: auto;
+	overflow: auto;
+}
+
+#downloadpanel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 210px;
+	height: 230px;
+	margin-right: 20px;
+	padding: 20px;
+	-webkit-border-radius: .8em; 
+	-moz-border-radius: .8em;
+	border-radius: .8em;
+	background: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eaeaea));
+	background: -moz-linear-gradient(top,  #ffffff,  #eaeaea);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eaeaea');
+	background-image: url(./images/download-background.png);
+	-webkit-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
+	-moz-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
+	box-shadow:inset 0 1px 4px rgba(0,0,0,.3);
+}
+
+#downloadpanel .button {
+	padding: .5em 0px;
+	width: 200px;
+}
+
+#downloadpanel p {
+	color: #444;
+	font: normal 1em/1.3em Helevetica, Arial, Sans-serif;
+	margin: 5px;
+	margin-bottom: 10px;
+	
+	text-shadow: rgba(255, 255, 255, 0.6) 0px 1px 0px;
+}
+
+/*------------- content -------------*/
+
+.article {
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 40px;
+/*
+		-moz-column-count: 3;
+	-moz-column-gap: 20px;
+	-webkit-column-count: 3;
+	-webkit-column-gap: 20px;
+	column-count: 3;
+	column-gap: 20px;
+*/
+}
+
+.icon-markup h2 {
+	display: block;	
+}
+
+.icon-markup img {
+	float: left;
+	opacity: .5;
+	margin: 0 10px 5px 0;
+}
+
+blockquote {
+	color: #919191;
+	text-shadow: none;
+	float: right;
+	width: 480px;
+	font: italic bold 1.8em/1.3em Georgia, Times, Serif;
+}
+
+ul {
+	margin: 0 20px;
+}
+
+ul li {
+	list-style-position: inside;
+	list-style-type: disc;
+}
+
+.features h2 {
+	float: left;
+}
+
+.features ul {
+	color: #88805f;
+	float: left;
+	clear: left;
+	font-size: 1.2em;
+	line-height: 1.2em;
+	text-shadow: rgba(255, 255, 255, 1) 0px 1px 0px;
+}
+
+.features-image {
+	float: right;
+	margin-right: 20px;
+}
+
+/* -------- examples  ------- */
+
+.example .small-area {
+	float: left;
+	width: 100px;
+	height: 100px;
+	line-height: 8em;
+	text-align: center;
+	margin-right: 10px;
+	background: #fff;
+	overflow: hidden;
+}
+
+.example h1 {
+	display: inline-block;
+	font: bold 2em/1em Helvetica, Arial, Sans-serif;
+	text-shadow: none;
+	color: #333;
+	margin: 0;
+}
+.example img {
+	float: left;
+	margin-right: 16px;
+}
+
