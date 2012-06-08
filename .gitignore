@@ -1,6 +1,7 @@
 # osx noise
 .DS_Store
 profile
+icons
 
 # xcode noise
 build/*
