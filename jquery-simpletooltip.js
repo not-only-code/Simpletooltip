@@ -1,7 +1,7 @@
 /*!
  * SimpleTooltip: show a tooltip in diferents directions from reference
  * carlos.sanz@gmail.com
- * for more info about the plugin please visit: http://code.google.com/p/simpletooltip/
+ * for more info about the plugin please visit: http://github.com/not-only-code/Simpletooltip
 **/
 
 (function($) {

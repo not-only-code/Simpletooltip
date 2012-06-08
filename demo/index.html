@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Simpletooltip sample page</title>
+	<title>Simpletooltip</title>
 	
 	<!-- Styles -->
 	<link rel="stylesheet" href="./fonts/stylesheet.css" media="screen" />
 	<link rel="stylesheet" href="./style.css" media="screen" />
 	
 	<!-- Simpletooltip scripts-->
-	<link rel="stylesheet" href="../style-simpletooltip-min.css" media="screen" />
+	<link rel="stylesheet" href="./js/simpletooltip/style-simpletooltip-min.css" media="screen" />
 	
-	<script src="./js/jquery.js"></script>
-	<script src="../jquery-simpletooltip-min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="./js/simpletooltip/jquery-simpletooltip-min.js"></script>
 
 	<script>
-		jQuery(document).ready(function() {
-			jQuery.simpletooltip();
+		jQuery(document).ready(function($) {
+			$.simpletooltip();
 		});
 	</script>
 	<!-- Simpletooltip scripts-->
@@ -47,7 +47,7 @@
 				<li>Jquery based</li>
 				<li>Minimal configuration</li>
 				<li>12 functional positions</li>
-				<li>no extra html structures, just use "title" attribute</li>
+				<li>no extra html structures, use "title" attribute</li>
 				<li>cross-browser</li>
 				<li>lightweight and fast download, less than 8Kb</li>
 			</ul>
@@ -60,16 +60,16 @@
 		
 		<div class="article">
 			<h2><a name="installation" href="#installation">Installation:</a></h2>
-			<p><a href="#download">Download the plugin</a> and decompress files, put the folder <em>jquery-simpletooltip</em> in your tree project files, would be nice create a folder that contains it, for example <em>js</em> (/js/jquery-simpletooltip).</p>
+			<p><a href="#download">Download the plugin</a> and decompress files, put the folder <em>simpletooltip</em> in your tree project files, would be nice create a folder that contains it, for example <em>js</em> (/js/simpletooltip).</p>
 			<p>In the <em>header</em> of your document attach the scripts <em>style-simpletooltip-min.css</em> and <em>jquery-simpletooltip-min.js</em>, of course, you will need load Jquery first:</p>
 			<code>
 				&lt;link rel=&quot;stylesheet&quot; href=&quot;..../jquery-simpletooltip/style-simpletooltip.css&quot; media=&quot;screen&quot; /&gt;<br /><br />
-				&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js&quot;&gt;&lt;/script&gt;<br />
-				&lt;script src=&quot;..../jquery-simpletooltip/jquery-simpletooltip.js&quot;&gt;&lt;/script&gt;
+				&lt;script src=&quot;http://code.jquery.com/jquery-1.7.2.min.js&quot;&gt;&lt;/script&gt;<br />
+				&lt;script src=&quot;..../simpletooltip/jquery-simpletooltip.js&quot;&gt;&lt;/script&gt;
 			</code>
 			<p>Initialize the plugin, it will detect all tooltips marked in the page:</p>
 			<code>
-				&lt;script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;jQuery(document).ready(function() {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery.simpletooltip();<br />&nbsp;&nbsp;&nbsp;&nbsp;});<br />&lt;/script&gt;
+				&lt;script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;jQuery(document).ready(function($) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.simpletooltip();<br />&nbsp;&nbsp;&nbsp;&nbsp;});<br />&lt;/script&gt;
 			</code>
 		</div>
 		
@@ -96,30 +96,40 @@
 		
 		<div class="article">
 			<h2><a name="positioning" href="#positioning">Positioning:</a></h2>
-			<p>Simpletooltip has 12 funcional positions, by default is located on <em>top</em> position, you can choose: <em>top</em>, <em>top-left</em>, <em>left-top</em>, <em>left</em>, <em>left-bottom</em>, <em>bottom-left</em>, <em>bottom</em>, <em>bottom-right</em>, <em>right-bottom</em>, <em>right</em>, <em>right-top</em>, <em>top-right</em>.
-			</p>
+			<p>Simpletooltip has 12 funcional positions, by default is located on <em>top</em> position, you can choose: <em>top</em>, <em>top-left</em>, <em>left-top</em>, <em>left</em>, <em>left-bottom</em>, <em>bottom-left</em>, <em>bottom</em>, <em>bottom-right</em>, <em>right-bottom</em>, <em>right</em>, <em>right-top</em>, <em>top-right</em>.</p>
+			
 			<p>To add the desired position, add the position name class:</p>
+			
 			<code>
 				&lt;div class=&quot;simpletooltip right-top&quot;&gt;right top&lt;/div&gt;
 			</code>
+			
 			<p>&clubs; example:</p>
+			
 			<div class="example">
-				<div class="small-area simpletooltip right-top" title="located on right and top">right top</div>&nbsp;&nbsp;&nbsp;
-				<div class="small-area simpletooltip bottom" title="located on bottom">bottom</div>&nbsp;&nbsp;&nbsp;
-				<div class="small-area simpletooltip left" title="located on left">left</div>&nbsp;&nbsp;&nbsp;
+				<div class="small-area simpletooltip right-top" title="located on right and top">right top</div>
+				<div class="small-area simpletooltip bottom" title="located on bottom">bottom</div>
+				<div class="small-area simpletooltip left" title="located on left">left</div>
 				<div class="small-area simpletooltip top-right" title="located on top and right">top right</div>
+				<div class="small-area simpletooltip left-bottom" title="located on left and bottom">left bottom</div>
+				<div class="small-area simpletooltip top-left last-child" title="located on top and left">top left</div>
 			</div>
+			
 		</div>
 		
 		<div class="article">
+			
 			<h2><a name="color-themes" href="#color-themes">Color themes:</a></h2>
-			<p>Simpletooltip has 4 color themes, the default theme is <em>seablue</em>, you can choose: <em>seablue</em>, <em>pastelblue</em>, <em>darkgray</em>, <em>lightgray</em>.
-			</p>
+			
+			<p>Simpletooltip has 4 color themes, the default theme is <em>seablue</em>, you can choose: <em>seablue</em>, <em>pastelblue</em>, <em>darkgray</em>, <em>lightgray</em>.</p>
+			
 			<p>To add the desired theme, add the theme name class:</p>
 			<code>
-				&lt;img src=&quot;./images/themesample-seablue.png&quot; class=&quot;simpletooltip darkgray&quot; title=&quot;Seablue Theme&quot;  /&gt;
+				&lt;img src=&quot;./images/themesample-seablue.png&quot; class=&quot;simpletooltip seablue&quot; title=&quot;Seablue Theme&quot;  /&gt;
 			</code>
+			
 			<p>&clubs; example:</p>
+			
 			<div class="example">
 				<img src="./images/themesample-seablue.png" class="simpletooltip" title="Seablue Theme" style="background-color:#e8f3f6"/>
 				<img src="./images/themesample-pastelblue.png" class="simpletooltip pastelblue" title="Pastelblue Theme" style="background-color:#6d7988"/>
@@ -131,19 +141,21 @@
 		
 		<div class="article">
 			<h2><a name="download" href="#download">Download:</a></h2>
-			<p>You can download the plugin (compressed format) from <a href="https://github.com/not-only-code/Simpletooltip/zipball/master">here</a>, anyway also you can access to <a href="https://github.com/not-only-code/Simpletooltip">GitHub repo</a><br />
-				Contribute with your ideas, new features, or bugs on <a href="https://github.com/not-only-code/Simpletooltip/issues">Git Issues</a><br />
-				If this plugin helped you, also you can <a href="#">donate</a>, thank you very much.</p>
+			<div class="download">
+				<p>You can download the plugin (.zip compressed) <a href="https://github.com/not-only-code/Simpletooltip/zipball/master">here</a>, anyway also you can access to <a href="https://github.com/not-only-code/Simpletooltip">GitHub repo</a>.</p>
+				<p>Contribute with your ideas, new features, or bugs on <a href="https://github.com/not-only-code/Simpletooltip/issues">Git Issues</a>.</p>
+				<p>If this plugin helped you, also you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MRNNVK3SDEQKN">donate</a>, thank you very much.</p>
+			</div>
 		</div>
 		
 		<div id="downloadpanel">
 			<a class="button green" href="https://github.com/not-only-code/Simpletooltip/zipball/master">download</a>
 			<p>Actual Version: 1.2</p>
-			<p>Latest Update: 17.03.2011</p>
+			<p>Latest Update: 20.05.2012</p>
 			<p>Also, you can access to <a href="https://github.com/not-only-code/Simpletooltip">Git repo</a>.</p>
-			<p>Do you have any  great idea?<br />Contribute on <a href="https://github.com/not-only-code/Simpletooltip/issues">Git Issues</a></p>
+			<p>Do you have any great idea?<br />Contribute on <a href="https://github.com/not-only-code/Simpletooltip/issues">Git Issues</a></p>
 			<p>Simpletooltip helped you?</p>
-			<a class="button blue" href="#">donate :)</a>
+			<a class="button blue" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MRNNVK3SDEQKN">donate :)</a>
 		</div>
 		
 	</div>
