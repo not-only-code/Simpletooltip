@@ -1,13 +1,14 @@
 # Simpletoolip
 
-...is a Jquery plugin, thought to insert short tooltips to any element of your website more easily
+![Simpletooltip logo](http://codingsomething.files.wordpress.com/2011/01/simpletooltip-logo1.png?w=200&h=200)
+> _...is a Jquery plugin, thought to insert short tooltips to any element of your website more easily_
 
 ## Features
 
 * Jquery based
 * Minimal configuration
 * 12 functional positions
-* no extra html structures, just use "title" attribute
+* no extra html structures, use "title" attribute
 * cross-browser
 * lightweight and fast download, less than 8Kb
 
@@ -19,14 +20,14 @@ In the header of your document attach the scripts style-simpletooltip-min.css an
 
 `<link rel="stylesheet" href="..../jquery-simpletooltip/style-simpletooltip.css" media="screen" />`
 
-`<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>`
-`<script src="..../jquery-simpletooltip/jquery-simpletooltip.js"></script>`
+`<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>`
+`<script src="..../simpletooltip/jquery-simpletooltip.js"></script>`
 
 Initialize the plugin, it will detect all tooltips marked in the page:
 
 `<script>
-    jQuery(document).ready(function() {
-        jQuery.simpletooltip();
+    jQuery(document).ready(function($) {
+        $.simpletooltip();
     });
 </script>`
 
@@ -61,4 +62,4 @@ To add the desired theme, add the theme name class:
 
 ## Download
 
-You can download the plugin (compressed format) [from here](https://github.com/not-only-code/Simpletooltip/zipball/master), anyway also you can access to GIT repo Contribute with your ideas, new features on Wiki. If this plugin helped you, also you can donate, thank you very much.
+You can download the plugin (zip format) [from here](https://github.com/not-only-code/Simpletooltip/zipball/master), anyway also you can access to GIT repo Contribute with your ideas, bugs, new features on [Git issues](https://github.com/not-only-code/Simpletooltip/issues). If this plugin helped you, also you can [donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MRNNVK3SDEQKN), thank you very much.
