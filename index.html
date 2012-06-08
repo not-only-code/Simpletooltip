@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Simpletooltip by not-only-code</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/not-only-code/Simpletooltip">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/not-only-code/Simpletooltip/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/not-only-code/Simpletooltip/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Simpletooltip</h1>
+          <p>Simpletooltip is a JQuery plugin, thought to insert short tooltips to any element of your website more easily</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/not-only-code">not-only-code</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>Simpletoolip</h1>
+
+<p>...is a Jquery plugin, thought to insert short tooltips to any element of your website more easily</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Jquery based</li>
+<li>Minimal configuration</li>
+<li>12 functional positions</li>
+<li>no extra html structures, just use "title" attribute</li>
+<li>cross-browser</li>
+<li>lightweight and fast download, less than 8Kb</li>
+</ul><h2>Installation</h2>
+
+<p>Download the plugin and decompress files, put the folder simpletooltip in your tree project files, would be nice create a folder that contains it, for example js (/js/simpletooltip).</p>
+
+<p>In the header of your document attach the scripts style-simpletooltip-min.css and jquery-simpletooltip-min.js, of course, you will need load Jquery first:</p>
+
+<p><code>&lt;link rel="stylesheet" href="..../jquery-simpletooltip/style-simpletooltip.css" media="screen" /&gt;</code></p>
+
+<p><code>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"&gt;&lt;/script&gt;</code>
+<code>&lt;script src="..../jquery-simpletooltip/jquery-simpletooltip.js"&gt;&lt;/script&gt;</code></p>
+
+<p>Initialize the plugin, it will detect all tooltips marked in the page:</p>
+
+<p><code>&lt;script&gt;
+    jQuery(document).ready(function() {
+        jQuery.simpletooltip();
+    });
+&lt;/script&gt;</code></p>
+
+<h2>Usage</h2>
+
+<p>You can use Simpletooltip in any element easily, first declare the class simpletooltip, and complete the attribute title, that will be the content of the tooltip, for example:</p>
+
+<p><code>&lt;h1 class="simpletooltip" title="And this is his tooltip"&gt;_This is a page title&lt;/h1&gt;</code></p>
+
+<p>Simpletooltip is thought for use small and descriptive texts replacing the original yellow tooltip that browsers offers when we complete the attribute title, Anyway, you can insert content more complex, like linebreaks, lists, images, etc...</p>
+
+<p><code>&lt;h1 class="simpletooltip" title="list options:&lt;br /&gt;&lt;ul&gt;&lt;li&gt;first option&lt;/li&gt;&lt;li&gt;second option&lt;/li&gt;&lt;li&gt;third option&lt;/li&gt;&lt;/ul&gt;"&gt;lists&lt;/h1&gt;</code></p>
+
+<h2>Positioning</h2>
+
+<p>Simpletooltip has 12 funcional positions, by default is located on 'top' position, you can choose: top, top-left, left-top, left, left-bottom, bottom-left, bottom, bottom-right, right-bottom, right, right-top, top-right.</p>
+
+<p>To add the desired position, add the position name class:</p>
+
+<p><code>&lt;div class="simpletooltip right-top"&gt;right top&lt;/div&gt;</code></p>
+
+<h2>Color Themes</h2>
+
+<p>Simpletooltip has 4 color themes, the default theme is seablue, you can choose: seablue, pastelblue, darkgray, lightgray.</p>
+
+<p>To add the desired theme, add the theme name class:</p>
+
+<p><code>&lt;img src="./images/themesample-seablue.png" class="simpletooltip darkgray" title="Seablue Theme" /&gt;</code></p>
+
+<h2>Download</h2>
+
+<p>You can download the plugin (compressed format) <a href="https://github.com/not-only-code/Simpletooltip/zipball/master">from here</a>, anyway also you can access to GIT repo Contribute with your ideas, new features on Wiki. If this plugin helped you, also you can donate, thank you very much.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
