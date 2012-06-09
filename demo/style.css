@@ -68,9 +68,11 @@ h1,h2,h3,h4 {
 	display: inline-block;
 	font-family: BrushScriptStdMedium;
 	font-style: normal;
-	font-size: 3.5em;
+	font-size: 3.8em;
 	line-height: 1em;
 	margin-bottom: 25px;
+	text-shadow: -1px -1px 0 rgba(0,0,0,.8),
+				  1px 1px 0 rgba(255,255,255,1);
 	color: white;
 }
 
@@ -288,8 +290,8 @@ a.button:visited {
 
 #downloadpanel {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 0px;
+	right: 3px;
 	width: 210px;
 	height: auto;
 	margin-right: 20px;
@@ -302,9 +304,12 @@ a.button:visited {
 	background: -moz-linear-gradient(top,  #ffffff,  #eaeaea);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eaeaea');
 	background-image: url(./images/download-background.png);
+	/*
 	-webkit-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
 	-moz-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
-	box-shadow:inset 0 1px 4px rgba(0,0,0,.3);
+	*/
+	box-shadow: inset 1px 1px 3px rgba(0,0,0,.2),
+				1px 1px 3px rgba(255,255,255,.7);
 	overflow: hidden;
 }
 
@@ -378,7 +383,7 @@ ul li {
 	float: left;
 	clear: left;
 	font: bold 1.25em/1.45em Helvetica, Arial, Sans-serif;
-	text-shadow: rgba(255, 255, 255, .8) 0px 1px 0px;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, .8);
 }
 
 .features-image {
