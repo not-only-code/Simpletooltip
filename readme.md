@@ -1,7 +1,7 @@
 Simpletoolip
 ============
 
-![Simpletooltip logo](http://codingsomething.files.wordpress.com/2011/01/simpletooltip-logo1.png?w=200&h=200)
+![Simpletooltip logo](http://codingsomething.files.wordpress.com/2011/01/simpletooltip-logo.png?w=200&h=200)
 > _...is a Jquery plugin, thought to insert short tooltips to any element of your website more easily_
 
 Features

@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Language" content="es-ES">
+	
 	<title>Simpletooltip</title>
+	<meta name="description" content="Simpletoolip is a Jquery plugin, thought to insert short tooltips to any element of your website more easily">
 	
 	<!-- Styles -->
-	<link rel="stylesheet" href="./fonts/stylesheet.css" media="screen" />
-	<link rel="stylesheet" href="./style.css" media="screen" />
+	<link rel="stylesheet" href="demo-assets/css/demo.css" media="screen" />
 	
-	<!-- Simpletooltip scripts-->
-	<link rel="stylesheet" href="../style-simpletooltip-min.css" media="screen" />
+	<!-- Modernizr -->
+	<script src="demo-assets/js/vendor/modernizr.simpletooltip.js"></script>
 	
-	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-	<script src="../jquery-simpletooltip-min.js"></script>
+	<!-- Simpletooltip styles and scripts-->
+	<link rel="stylesheet" href="css/simpletooltip.min.css" media="screen" />
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="js/simpletooltip.min.js"></script>
 
 	<script>
 		jQuery(document).ready(function($) {
-			$.simpletooltip();
+			$.simpletooltip({
+				background_color: 'rgba(0,0,0,0.8)',
+				color: 'white',
+				border_width: 'none',
+				fade: false
+			});
 		});
 	</script>
 	<!-- Simpletooltip scripts-->
@@ -25,8 +40,8 @@
 <body>
 	<div id="header">
 		<div class="wrapper">
-			<h1 class="simpletooltip pastelblue right" title="Just works! cool :)">Simpletooltip</h1>
-			<a href="http://jquery.org/" class="jquery" target="_blank"><img src="./images/jquery.png" width="120"/></a>
+			<h1 class="simpletooltip right" title="Just works! cool :)" data-simpletooltip-background-color="#002288" data-simpletooltip-border-color="#FF00CC">Simpletooltip</h1>
+			<a href="http://jquery.org/" class="jquery" target="_blank"><img src="demo-assets/images/jquery.png" width="120"/></a>
 		</div>
 	</div>
 	<div id="section">
@@ -53,7 +68,7 @@
 			</ul>
 			
 			<!-- 
-			<img class="features-image" src="./images/box-design.png" alt="Box Design" />
+			<img class="features-image" src="demo-assets/images/box-design.png" alt="Box Design" />
 			-->
 			
 		</div>
@@ -89,7 +104,7 @@
 			<div class="example">
 				<h1 class="simpletooltip" title="Simple tooltip text">Simple text</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<h1 class="simpletooltip" title="list options:<br /><ul><li>first option</li><li>second option</li><li>third option</li></ul>">Lists</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<h1 class="simpletooltip" title="<img src='./images/landmarkup-icon.png' width='100' height='100' />">Images</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h1 class="simpletooltip" title="<img src='demo-assets/images/landmarkup-icon.png' width='100' height='100' />">Images</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<h1 class="simpletooltip" title="<h4 style='margin-bottom: 0px'>Simpletooltip</h4>">Custom fonts</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
@@ -107,12 +122,21 @@
 			<p>&clubs; example:</p>
 			
 			<div class="example">
-				<div class="small-area simpletooltip right-top" title="located on right and top">right top</div>
-				<div class="small-area simpletooltip bottom" title="located on bottom">bottom</div>
-				<div class="small-area simpletooltip left" title="located on left">left</div>
-				<div class="small-area simpletooltip top-right" title="located on top and right">top right</div>
-				<div class="small-area simpletooltip left-bottom" title="located on left and bottom">left bottom</div>
-				<div class="small-area simpletooltip top-left last-child" title="located on top and left">top left</div>
+				<div class="small-area simpletooltip top" title="located on right and top">top</div>
+				<div class="small-area simpletooltip top-right" title="located on right and top">top-right</div>
+				<div class="small-area simpletooltip right-top" title="located on right and top">right-top</div>
+				<div class="small-area simpletooltip right" title="located on right and top">right</div>
+				<div class="small-area simpletooltip right-bottom" title="located on right and top">right-bottom</div>
+				<div class="small-area simpletooltip bottom-right last-child" title="located on right and top">bottom-right</div>
+			</div>
+
+			<div class="example">
+				<div class="small-area simpletooltip bottom" title="located on right and top">bottom</div>
+				<div class="small-area simpletooltip bottom-left" title="located on right and top">bottom-left</div>
+				<div class="small-area simpletooltip left-bottom" title="located on right and top">left-bottom</div>
+				<div class="small-area simpletooltip left" title="located on right and top">left</div>
+				<div class="small-area simpletooltip left-top" title="located on top and left">left-top</div>
+				<div class="small-area simpletooltip top-left last-child" title="located on top and left">top-left</div>
 			</div>
 			
 		</div>
@@ -125,16 +149,16 @@
 			
 			<p>To add the desired theme, add the theme name class:</p>
 			<code>
-				&lt;img src=&quot;./images/themesample-seablue.png&quot; class=&quot;simpletooltip seablue&quot; title=&quot;Seablue Theme&quot;  /&gt;
+				&lt;img src=&quot;demo-assets/images/themesample-seablue.png&quot; class=&quot;simpletooltip seablue&quot; title=&quot;Seablue Theme&quot;  /&gt;
 			</code>
 			
 			<p>&clubs; example:</p>
 			
 			<div class="example">
-				<img src="./images/themesample-seablue.png" class="simpletooltip" title="Seablue Theme" style="background-color:#e8f3f6"/>
-				<img src="./images/themesample-pastelblue.png" class="simpletooltip pastelblue" title="Pastelblue Theme" style="background-color:#6d7988"/>
-				<img src="./images/themesample-darkgray.png" class="simpletooltip darkgray" title="Darkgray Theme" style="background-color: #9da281"/>
-				<img src="./images/themesample-lightgray.png" class="simpletooltip lightgray" title="Lightgray Theme" style="background-color: #00619e; margin-right:0"/>
+				<img src="demo-assets/images/themesample-seablue.png" class="simpletooltip" title="Seablue Theme" style="background-color:#e8f3f6"/>
+				<img src="demo-assets/images/themesample-pastelblue.png" class="simpletooltip pastelblue" title="Pastelblue Theme" style="background-color:#6d7988"/>
+				<img src="demo-assets/images/themesample-darkgray.png" class="simpletooltip darkgray" title="Darkgray Theme" style="background-color: #9da281"/>
+				<img src="demo-assets/images/themesample-lightgray.png" class="simpletooltip lightgray" title="Lightgray Theme" style="background-color: #00619e; margin-right:0"/>
 			</div>
 			
 		</div>

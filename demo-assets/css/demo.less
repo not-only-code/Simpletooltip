@@ -1,49 +1,37 @@
-/* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
+
+/* Custom Fonts: Brush Script Std Medium 
+-------------------------------------------------------------- */
+@font-face {
+	font-family: 'BrushScriptStdMedium';
+	src: url('../fonts/brushscriptstd-webfont.eot');
+	src: url('../fonts/brushscriptstd-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/brushscriptstd-webfont.woff') format('woff'),
+		 url('../fonts/brushscriptstd-webfont.ttf') format('truetype'),
+		 url('../fonts/brushscriptstd-webfont.svg#webfont7NIqi73V') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+/* Variables
 -------------------------------------------------------------- */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	background: transparent;
-	border: 0;
-	margin: 0;
-	padding: 0;
-	vertical-align: baseline;
-}
-body {
-	line-height: 1;
-}
-h1, h2, h3, h4, h5, h6 {
-	clear: both;
-	font-weight: normal;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote {
-	quotes: none;
-}
-blockquote:before, blockquote:after {
-	content: '';
-	content: none;
-}
-del {
-	text-decoration: line-through;
-}
-/* tables still need 'cellspacing="0"' in the markup */
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-a img {
-	border: none;
-}
+@using-ieclasses: true;		// whether or not the markup has html5-boilerplate style IE classes in it or not
+@using-modernizr: true; 	// whether or not modernizer feature-detection classes are being used
+@disable-filters: false; 	// whether or not to disable MS-specific 'filter' properties (can make IE slow!)
+
+
+/* Libraries: CodeKit Framework imported from Clearless (https://github.com/clearleft/clearless)
+-------------------------------------------------------------- */
+
+@import url("helpers.less");
+@import url("resets.less");
+
+
+/* =Reset
+-------------------------------------------------------------- */
+.reset();
+
 
 /* General Styles
 -------------------------------------------------------------- */
@@ -59,9 +47,7 @@ body{
 	color: #555;
 	font: italic 13px/1.2em Georgia, Times, Serif;
 	background: #bfc9d5;
-	background: -webkit-gradient(linear, left top, left bottom, from(#bfc9d5), to(#e5e9ee));
-	background: -moz-linear-gradient(top,  #bfc9d5,  #e5e9ee);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#bfc9d5', endColorstr='#e5e9ee');
+	#gradient > .vertical(#bfc9d5, #e5e9ee);
 }
 
 h1,h2,h3,h4 {
@@ -118,12 +104,11 @@ code,
 	position: relative;
 	display: block;
 	padding: 20px;
-	background-color: #dfdbc3;
+	font-family: 'Monospace';
+	border: 1px dashed #888;
+	background-color: white;
 	color: #6e614d;
-	border: dashed 1px #88795f;
-	-webkit-border-radius: .5em;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
+	.border-radius(.5em);
 	overflow: hidden;
 }
 
@@ -137,7 +122,7 @@ code {
 }
 
 .download {
-	background-image: url(./images/download-background.png);
+	background-image: url(../images/download-background.png);
 }
 
 .download p {
@@ -270,7 +255,7 @@ a.button:visited {
 	color: #e8f3f6;
 	line-height: 1.5em;
 	text-shadow: 1px 3px 1px rgba(0,0,0,.4);
-	background: url(./images/simpletooltip-logo.png) no-repeat 0 10px;
+	background: url(../images/simpletooltip-logo.png) no-repeat 0 10px;
 }
 
 #header a.jquery {
@@ -303,7 +288,7 @@ a.button:visited {
 	background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eaeaea));
 	background: -moz-linear-gradient(top,  #ffffff,  #eaeaea);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eaeaea');
-	background-image: url(./images/download-background.png);
+	background-image: url(../images/download-background.png);
 	/*
 	-webkit-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
 	-moz-box-shadow:inset 0 1px 4px rgba(0,0,0,.2);
