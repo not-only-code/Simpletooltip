@@ -1,6 +1,6 @@
 #Simpletoolip
 
-![Simpletooltip logo](http://codingsomething.files.wordpress.com/2011/01/simpletooltip-logo.png?w=200&h=200)
+![Simpletooltip logo](https://codingsomething.files.wordpress.com/2012/06/simpletooltip-logo-cropped.png?w=200&h=200)
 > _...is a Jquery plugin, thought to insert short tooltips to any element of your website more easily_
 
 ## Features
@@ -14,8 +14,13 @@
 
 ## Build
 
-`$ npm install`   
-`$ grunt`
+```
+$ npm install
+```
+
+```
+$ grunt
+```
 
 ## Installation
 
@@ -23,29 +28,53 @@ Download the plugin and decompress files, put the folder `simpletooltip` in your
 
 In the header of your document attach the scripts `simpletooltip.min.css` and `simpletooltip.min.js`, of course, you will need load jQuery first:
 
-`<link rel="stylesheet" href="..../simpletooltip/dist/css/simpletooltip.min.css" media="screen" />`
+```
+<link rel="stylesheet" href="..../simpletooltip/dist/css/simpletooltip.min.css" media="screen" />
 
-`<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>`
-`<script src="..../simpletooltip/dist/js/simpletooltip.min.js"></script>`
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="..../simpletooltip/dist/js/simpletooltip.min.js"></script>
+```
+
 
 Initialize the plugin, it will detect all tooltips marked in the page:
 
-`<script>
+```
+<script>
     jQuery(document).ready(function($) {
         $.simpletooltip();
     });
-</script>`
+</script>
+```
 
 
 ## Usage
 
 You can use Simpletooltip in any element easily, first declare the class simpletooltip, and complete the attribute title, that will be tooltip content, for example:
 
-`<h1 class="simpletooltip" title="And this is his tooltip">_This is a page title</h1>`
+```
+<h1 class="simpletooltip" title="And this is his tooltip">_This is a page title</h1>
+```
 
 Simpletooltip is thought for use small and descriptive texts replacing the original yellow tooltip that browsers offers when we complete the attribute title. Anyway, you can insert content more complex like linebreaks, lists, images, etc...
 
-`<h1 class="simpletooltip" title="list options:<br /><ul><li>first option</li><li>second option</li><li>third option</li></ul>">lists</h1>`
+```
+<h1 class="simpletooltip" title="list options:<br /><ul><li>first option</li><li>second option</li><li>third option</li></ul>">lists</h1>
+```
+
+
+## Parameters
+
+attribute          | description                                      | values                                                                                                                                               | default
+-------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|----------
+`position`         | position of tooltip in relation with the element | `top`, `top-left`, `left-top`, `left`, `left-bottom`, `bottom-left`, `bottom`, `bottom-right`, `right-bottom`, `right`, `right-top`, `top-right`     | `top` 
+`color`            | color of text inside the box                     | hex `#FFFFFF`, rgba `'rgba(255, 255, 255, 0.5)'`, string `'white'`                                                                                   | `#CCCCCC`
+`background_color` | color of background of the box                   | hex `#000000`, rgba `'rgba(0, 0, 0, 0.5)'`, string `'black'`                                                                                         | `#222222`
+`border_color`     | color of the box border                          | hex `#000000`, rgba `'rgba(0, 0, 0, 0.5)'`, string `'black'`                                                                                         | `#111111`
+`border_width`     | width of box border (in pixels)                  | number `4`, string `4px`, without border `0`, `'none'`                                                                                               | `4px`     
+`arrow_width`      | size of the arrow (in pixels)                    | number `6`, string `6px`                                                                                                                             | `4px`     
+`fade`             | animation when appears                           | `true`, `false`                                                                                                                                      | `true`    
+`max_width`        | limit of the box width                           | number `200`, string `'200px'`                                                                                                                       | `200px`  
+
 
 
 ## Positioning
@@ -54,7 +83,9 @@ Simpletooltip has 12 funcional positions, by default is located on 'top' positio
 
 To add the desired position, add a `position` data attribute:
 
-`<div class="simpletooltip" data-simpletooltip-position="right-top">right top</div>`
+```
+<div class="simpletooltip" data-simpletooltip-position="right-top">right top</div>
+```
 
 
 ## Color Themes
@@ -63,7 +94,9 @@ Simpletooltip has 4 color themes, the default theme is seablue, you can choose: 
 
 To add the desired theme, add a `theme` data attribute:
 
-`<img src="./images/themesample-seablue.png" class="simpletooltip" title="blue Theme" data-simpletooltip-theme="blue" />`
+```
+<img src="./images/themesample-seablue.png" class="simpletooltip" title="blue Theme" data-simpletooltip-theme="blue" />
+```
 
 ## Download
 
