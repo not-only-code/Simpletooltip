@@ -9,11 +9,34 @@
  */
 
 (function(a) {
-    var b = {
-        direction: "top",
-        color: "#cccccc",
-        background_color: "#222222",
-        border_color: "#111111",
+    var b = null, c = {
+        dark: {
+            color: "#CCCCCC",
+            background_color: "#222222",
+            border_color: "#111111",
+            border_width: 4
+        },
+        gray: {
+            color: "#434343",
+            background_color: "#DCDCDC",
+            border_color: "#BABABA",
+            border_width: 4
+        },
+        white: {
+            color: "#6D7988",
+            background_color: "#CCDEF2",
+            border_color: "#FFFFFF",
+            border_width: 4
+        },
+        blue: {
+            color: "#FFFFFF",
+            background_color: "#0088BE",
+            border_color: "#00669C",
+            border_width: 4
+        }
+    }, d = {
+        position: "top",
+        theme: "dark",
         border_width: 2,
         arrow_width: 6,
         padding: {
@@ -21,251 +44,268 @@
             height: 6
         },
         max_width: 200,
-        fade: true,
-        position: {}
-    }, c, d = {
+        fade: true
+    }, e, f = {
         border: 6,
         top: 15,
         right: 15,
         bottom: 15,
         left: 15
-    }, e = [ "top", "top-right", "right-top", "right", "right-bottom", "bottom-right", "bottom", "bottom-left", "left-bottom", "left", "left-top", "top-left" ], f = [], g = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title<span class="arrow">&nbsp;</span></div>';
-    function h(a) {
-        for (var b = 0; b < e.length; b++) {
-            if (a.hasClass(e[b])) {
-                return e[b];
-            }
-        }
-        return c.direction;
-    }
-    function i(b) {
-        var c = f[b.data.index], d;
-        if (c.length) {
-            d = g.replace("%index", b.data.index);
-            d = d.replace("%position", h(a(b.target)));
-            d = d.replace("%title", c);
-            return d;
-        }
-        return false;
-    }
-    function j(b) {
-        var c = a(this), d = "#simple-tooltip-" + b.data.index, e = i(b), f = l(c, "fade");
-        if (e) {
-            var g = a("body").find(d);
-            if (g.length) {
-                b.preventDefault();
-                return false;
-            }
-            a(e).appendTo(a("body"));
-            var h = a("body").find(d);
-            h.hide();
-            m(h, c);
-            if (f) {
-                h.delay(180).fadeIn(200);
-            } else {
-                h.show();
-            }
-        }
-        b.preventDefault();
-    }
-    function k(b) {
-        b.preventDefault();
-        var c = a("body").find("#simple-tooltip-" + b.data.index), d = l(a(this), "fade");
-        if (c.length === 0) {
-            return false;
-        }
-        if (c.css("opacity") === 0) {
-            c.remove();
-            return false;
-        }
-        if (d) {
-            c.clearQueue().stop().fadeOut(100, function() {
-                c.remove();
-            });
-        } else {
-            c.remove();
-        }
-    }
-    function l(a, b) {
-        var d = "simpletooltip-" + b.replace("_", "-");
+    }, g = [], h = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title</div>', i = '<span class="arrow">&nbsp;</span>';
+    function j(a, b) {
+        var d = "simpletooltip-" + b.replace("_", "-"), f;
         if (a.data(d)) {
             return a.data(d);
         }
-        if (c[b]) {
-            return c[b];
+        if (f = a.data("simpletooltip-theme")) {
+            if (c[f] && c[f][b]) {
+                return c[f][b];
+            }
+        }
+        if (e[b]) {
+            return e[b];
         }
         return false;
     }
-    function m(a, b) {
-        var e = b.offset(), f = a.find(" > .arrow"), g = l(b, "background_color"), i = l(b, "border_color");
-        var j = l(b, "border_width");
-        j = typeof j === "boolean" || j === "none" ? 0 : Number(j);
-        var k = !j ? g : i;
-        var m = Math.round(c.arrow_width * 3 / 4), n = -parseInt(c.arrow_width * 2 + j, 10), o = -parseInt(m * 2 + j, 10);
-        a.css({
-            maxWidth: l(b, "max_width"),
-            backgroundColor: g,
-            color: l(b, "color"),
+    function k(b) {
+        var c = g[b.data.index], d, e, f;
+        if (c.length) {
+            d = h.replace("%index", b.data.index);
+            d = d.replace("%title", c);
+            d = d.replace("%position", j(a(b.currentTarget), "position"));
+            e = a(d);
+            f = a(i);
+            e.append(f);
+            e.$arrow = f;
+            return e;
+        }
+        return false;
+    }
+    function l(c) {
+        var d = a(this), e;
+        if (!(e = d.data("$simpletooltip"))) {
+            e = k(c);
+            d.data("$simpletooltip", e);
+        }
+        if (!e) {
+            return c;
+        }
+        if (b.find("#" + e.attr("id")).length) {
+            return c;
+        }
+        b.append(e);
+        e.hide();
+        n(d);
+        if (j(d, "fade")) {
+            e.delay(180).fadeIn(200);
+        } else {
+            e.show();
+        }
+        return c;
+    }
+    function m(c) {
+        var d = a(this), e;
+        if (!(e = d.data("$simpletooltip"))) {
+            return c;
+        }
+        if (!b.find("#" + e.attr("id").length)) {
+            return c;
+        }
+        if (!e.css("opacity")) {
+            e.remove();
+            return c;
+        }
+        if (j(d, "fade")) {
+            e.clearQueue().stop().fadeOut(100, function() {
+                e.remove();
+            });
+        } else {
+            e.remove();
+        }
+        return c;
+    }
+    function n(b) {
+        if (!b.data("$simpletooltip")) {
+            return;
+        }
+        var c = b.data("$simpletooltip"), d = b.offset(), g = c.$arrow ? c.$arrow : c.find(" > .arrow"), h = j(b, "background_color"), i = j(b, "border_color");
+        var k = j(b, "border_width");
+        k = typeof k === "boolean" || k === "none" ? 0 : Number(k);
+        var l = !k ? h : i;
+        var m = Math.round(e.arrow_width * 3 / 4), n = -parseInt(e.arrow_width * 2 + k, 10), o = -parseInt(m * 2 + k, 10);
+        var p = {
+            maxWidth: j(b, "max_width"),
+            backgroundColor: h,
+            color: j(b, "color"),
             borderColor: i,
-            borderWidth: j
-        });
-        switch (h(b)) {
+            borderWidth: k
+        };
+        switch (j(b, "position")) {
           case "top-right":
-            e.top -= parseInt(a.outerHeight() + d.bottom, 10);
-            e.left += parseInt(b.outerWidth() - d.right - d.border, 10);
-            f.css({
-                left: c.padding.width - j,
+            d.top -= parseInt(c.outerHeight() + f.bottom, 10);
+            d.left += parseInt(b.outerWidth() - f.right - f.border, 10);
+            g.css({
+                left: e.padding.width - k,
                 borderWidth: m,
                 bottom: o,
-                borderTopColor: k,
-                borderLeftColor: k
+                borderTopColor: l,
+                borderLeftColor: l
             });
             break;
 
           case "right-top":
-            e.top -= parseInt(a.outerHeight() - d.bottom, 10);
-            e.left += parseInt(b.outerWidth() + d.right, 10);
-            f.css({
-                bottom: c.padding.height - j,
+            d.top -= parseInt(c.outerHeight() - f.bottom, 10);
+            d.left += parseInt(b.outerWidth() + f.right, 10);
+            g.css({
+                bottom: e.padding.height - k,
                 borderWidth: m,
                 left: o,
-                borderRightColor: k,
-                borderBottomColor: k
+                borderRightColor: l,
+                borderBottomColor: l
             });
             break;
 
           case "right":
-            e.top += parseInt((b.outerHeight() - a.outerHeight()) / 2, 10);
-            e.left += parseInt(b.outerWidth() + d.right, 10);
-            f.css({
+            d.top += parseInt((b.outerHeight() - c.outerHeight()) / 2, 10);
+            d.left += parseInt(b.outerWidth() + f.right, 10);
+            g.css({
                 left: n,
-                borderRightColor: k,
-                marginTop: -c.arrow_width
+                borderRightColor: l,
+                marginTop: -e.arrow_width
             });
             break;
 
           case "right-bottom":
-            e.top += parseInt(b.outerHeight() - d.bottom, 10);
-            e.left += parseInt(b.outerWidth() + d.right, 10);
-            f.css({
-                top: c.padding.height - j,
+            d.top += parseInt(b.outerHeight() - f.bottom, 10);
+            d.left += parseInt(b.outerWidth() + f.right, 10);
+            g.css({
+                top: e.padding.height - k,
                 borderWidth: m,
                 left: o,
-                borderRightColor: k,
-                borderTopColor: k
+                borderRightColor: l,
+                borderTopColor: l
             });
             break;
 
           case "bottom-right":
-            e.top += parseInt(b.outerHeight() + d.bottom, 10);
-            e.left += parseInt(b.outerWidth() - d.right - d.border, 10);
-            f.css({
-                left: c.padding.width - j,
+            d.top += parseInt(b.outerHeight() + f.bottom, 10);
+            d.left += parseInt(b.outerWidth() - f.right - f.border, 10);
+            g.css({
+                left: e.padding.width - k,
                 borderWidth: m,
                 top: o,
-                borderBottomColor: k,
-                borderLeftColor: k
+                borderBottomColor: l,
+                borderLeftColor: l
             });
             break;
 
           case "bottom":
-            e.top += parseInt(b.outerHeight() + d.bottom, 10);
-            e.left += parseInt((b.outerWidth() - a.outerWidth()) / 2, 10);
-            f.css({
+            d.top += parseInt(b.outerHeight() + f.bottom, 10);
+            d.left += parseInt((b.outerWidth() - c.outerWidth()) / 2, 10);
+            g.css({
                 top: n,
-                marginLeft: -c.arrow_width,
-                borderBottomColor: k
+                marginLeft: -e.arrow_width,
+                borderBottomColor: l
             });
             break;
 
           case "bottom-left":
-            e.top += parseInt(b.outerHeight() + d.bottom, 10);
-            e.left -= parseInt(a.outerWidth() - d.left - d.border, 10);
-            f.css({
-                right: c.padding.width - j,
+            d.top += parseInt(b.outerHeight() + f.bottom, 10);
+            d.left -= parseInt(c.outerWidth() - f.left - f.border, 10);
+            g.css({
+                right: e.padding.width - k,
                 borderWidth: m,
                 top: o,
-                borderBottomColor: k,
-                borderRightColor: k
+                borderBottomColor: l,
+                borderRightColor: l
             });
             break;
 
           case "left-bottom":
-            e.top += parseInt(b.outerHeight() - d.bottom, 10);
-            e.left -= parseInt(a.outerWidth() + d.left, 10);
-            f.css({
-                top: c.padding.height - j,
+            d.top += parseInt(b.outerHeight() - f.bottom, 10);
+            d.left -= parseInt(c.outerWidth() + f.left, 10);
+            g.css({
+                top: e.padding.height - k,
                 borderWidth: m,
                 right: o,
-                borderLeftColor: k,
-                borderTopColor: k
+                borderLeftColor: l,
+                borderTopColor: l
             });
             break;
 
           case "left":
-            e.top += parseInt((b.outerHeight() - a.outerHeight()) / 2, 10);
-            e.left -= parseInt(a.outerWidth() + d.left, 10);
-            f.css({
+            d.top += parseInt((b.outerHeight() - c.outerHeight()) / 2, 10);
+            d.left -= parseInt(c.outerWidth() + f.left, 10);
+            g.css({
                 right: n,
-                borderLeftColor: k,
-                marginTop: -c.arrow_width
+                borderLeftColor: l,
+                marginTop: -e.arrow_width
             });
             break;
 
           case "left-top":
-            e.top -= parseInt(a.outerHeight() - d.bottom, 10);
-            e.left -= parseInt(a.outerWidth() + d.left, 10);
-            f.css({
-                bottom: c.padding.height - j,
+            d.top -= parseInt(c.outerHeight() - f.bottom, 10);
+            d.left -= parseInt(c.outerWidth() + f.left, 10);
+            g.css({
+                bottom: e.padding.height - k,
                 borderWidth: m,
                 right: o,
-                borderLeftColor: k,
-                borderBottomColor: k
+                borderLeftColor: l,
+                borderBottomColor: l
             });
             break;
 
           case "top-left":
-            e.top -= parseInt(a.outerHeight() + d.bottom, 10);
-            e.left -= parseInt(a.outerWidth() - d.left, 10);
-            f.css({
-                right: c.padding.width - j,
+            d.top -= parseInt(c.outerHeight() + f.bottom, 10);
+            d.left -= parseInt(c.outerWidth() - f.left, 10);
+            g.css({
+                right: e.padding.width - k,
                 borderWidth: m,
                 bottom: o,
-                borderTopColor: k,
-                borderRightColor: k
+                borderTopColor: l,
+                borderRightColor: l
             });
             break;
 
           default:
-            e.top -= parseInt(a.outerHeight() + d.top, 10);
-            e.left += parseInt((b.outerWidth() - a.outerWidth()) / 2, 10);
-            f.css({
+            d.top -= parseInt(c.outerHeight() + f.top, 10);
+            d.left += parseInt((b.outerWidth() - c.outerWidth()) / 2, 10);
+            g.css({
                 bottom: n,
-                borderTopColor: k,
-                marginLeft: -c.arrow_width
+                borderTopColor: l,
+                marginLeft: -e.arrow_width
             });
         }
-        a.css({
-            top: e.top,
-            left: e.left
+        p = a.extend(p, {
+            top: d.top,
+            left: d.left
         });
+        c.css(p);
     }
-    function n() {
+    function o(f) {
+        b = a("body");
+        e = a.extend(d, f);
+        var g = c[e.theme];
+        if (g !== "undefined") {
+            e = a.extend(e, g);
+        }
+    }
+    function p() {
         a(".simpletooltip").each(function(b) {
             var c = a(this);
             c.css("cursor", "pointer");
-            f[b] = c.attr("title");
+            g[b] = c.attr("title");
             c.attr("title", "");
             c.on("mouseenter", {
                 index: b
-            }, j);
+            }, l);
             c.on("mouseleave", {
                 index: b
-            }, k);
+            }, m);
         });
     }
-    a.simpletooltip = function(d) {
-        c = a.extend(b, d);
-        n();
+    a.simpletooltip = function(a) {
+        o(a);
+        p();
     };
 })(jQuery);
