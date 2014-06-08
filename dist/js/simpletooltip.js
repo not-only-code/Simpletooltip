@@ -252,13 +252,14 @@
     }
     function n() {
         a(".simpletooltip").each(function(b) {
-            a(this).css("cursor", "pointer");
-            f[b] = a(this).attr("title");
-            a(this).attr("title", "");
-            a(this).on("mouseenter", {
+            var c = a(this);
+            c.css("cursor", "pointer");
+            f[b] = c.attr("title");
+            c.attr("title", "");
+            c.on("mouseenter", {
                 index: b
             }, j);
-            a(this).on("mouseleave", {
+            c.on("mouseleave", {
                 index: b
             }, k);
         });
