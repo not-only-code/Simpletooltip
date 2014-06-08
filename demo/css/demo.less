@@ -16,6 +16,10 @@
 /* Variables
 -------------------------------------------------------------- */
 
+@link-color: #4baa00;
+@code-text-color: #6e614d;
+@link-color-hover: #977400;
+
 @using-ieclasses: true;		// whether or not the markup has html5-boilerplate style IE classes in it or not
 @using-modernizr: true; 	// whether or not modernizer feature-detection classes are being used
 @disable-filters: false; 	// whether or not to disable MS-specific 'filter' properties (can make IE slow!)
@@ -42,7 +46,7 @@ html {
 	background: #bfc9d5;
 }
 
-body{
+body {
 	height: auto;
 	color: #555;
 	font: italic 13px/1.2em Georgia, Times, Serif;
@@ -62,23 +66,26 @@ h1,h2,h3,h4 {
 	color: white;
 }
 
-a:link,
-a:active,
-a:visited {
-	color: #4baa00;
+a {
+	&:link,
+	&:active,
+	&:visited {
+		color: @link-color;
+	}
+
+	&:hover {
+		color: @link-color-hover;
+	}
 }
 
-a:hover {
-	color: #977400;
-}
-
-h2 a:link,
-h2 a:active,
-h2 a:hover,
-h2 a:visited {
-	text-decoration: none;
-	color: #6a9f22;
-	
+h2 {
+	a:link,
+	a:active,
+	a:hover,
+	a:visited {
+		text-decoration: none;
+		color: darken(@link-color, 5%);
+	}
 }
 
 p, li {
@@ -94,7 +101,7 @@ code,
 .download {
 	margin: 0 15px;
 	margin-bottom: 25px;
-	text-shadow: rgba(255, 255, 255, 0.7) 0px 1px 0px;
+	text-shadow: 0px 1px 0px fadeout(white, 30%);
 }
 
 code,
@@ -107,12 +114,14 @@ code,
 	font-family: 'Monospace';
 	border: 1px dashed #888;
 	background-color: white;
-	color: #6e614d;
+	color: @code-text-color;
 	.border-radius(.5em);
 	overflow: hidden;
 }
 
 code {
+	color: @code-text-color;
+	font-family: 'Consolas', 'Lucida Console', 'Courier' !important;
 	text-shadow: none;
 }
 
@@ -156,32 +165,28 @@ strong {
 	text-decoration: none;
 	font: 2.2em/.3em BrushScriptStdMedium, Helvetica, Arial, sans-serif;
 	padding: .5em 2em .55em;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	opacity: .7;
-	
-	-webkit-border-radius: .3em; 
-	-moz-border-radius: .3em;
-	border-radius: .3em;
-	/*
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	*/
+	text-shadow: 0 1px 1px fadeout(black, 70%);
+	opacity: 0.7;
+	.border-radius(.3em)
 }
+
 .button:hover {
 	text-decoration: none;
 }
+
 .button:active {
 	position: relative;
 	top: 1px;
 }
 
-a.button:link,
-a.button:active,
-a.button:visited {
-	color: white;
+a.button {
+	&:link,
+	&:active,
+	&:visited {
+		color: white;
+	}
 }
-	
+
 
 /* blue */
 
@@ -366,6 +371,7 @@ ul li {
 .features ul {
 	color: #6d7988;
 	float: left;
+	white-space: nowrap;
 	clear: left;
 	font: bold 1.25em/1.45em Helvetica, Arial, Sans-serif;
 	text-shadow: 1px 1px 0 rgba(255, 255, 255, .8);

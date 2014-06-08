@@ -15,3 +15,6 @@ CV
 nbproject
 deploy.sh
 *.psd
+
+# node
+/node_modules

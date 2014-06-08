@@ -208,7 +208,7 @@ h2 a:active,
 h2 a:hover,
 h2 a:visited {
   text-decoration: none;
-  color: #6a9f22;
+  color: #409100;
 }
 p,
 li {
@@ -223,7 +223,7 @@ code,
 .download {
   margin: 0 15px;
   margin-bottom: 25px;
-  text-shadow: rgba(255, 255, 255, 0.7) 0px 1px 0px;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7);
 }
 code,
 .example,
@@ -242,6 +242,8 @@ code,
   overflow: hidden;
 }
 code {
+  color: #6e614d;
+  font-family: 'Consolas', 'Lucida Console', 'Courier' !important;
   text-shadow: none;
 }
 .example {
@@ -279,17 +281,11 @@ strong {
   text-decoration: none;
   font: 2.2em/0.3em BrushScriptStdMedium, Helvetica, Arial, sans-serif;
   padding: .5em 2em .55em;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-  opacity: .7;
-  -webkit-border-radius: .3em;
-  -moz-border-radius: .3em;
-  border-radius: .3em;
-  /*
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	*/
-
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.30000000000000004);
+  opacity: 0.7;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  border-radius: 0.3em;
 }
 .button:hover {
   text-decoration: none;
@@ -462,6 +458,7 @@ ul li {
 .features ul {
   color: #6d7988;
   float: left;
+  white-space: nowrap;
   clear: left;
   font: bold 1.25em/1.45em Helvetica, Arial, Sans-serif;
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);

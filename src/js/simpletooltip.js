@@ -1,16 +1,4 @@
-/*!
- * SimpleTooltip: show a tooltip in diferents directions from reference
- * carlos.sanz@gmail.com
- * for more info about the plugin please visit: http://github.com/not-only-code/Simpletooltip
-**/
-
 (function($) {
-	//---- Local debug
-	function _debug (msg) {
-		if (window.console) {
-			console.debug(msg);
-		}
-	}
 	//--------- --
 	//
 	var defaults = {
@@ -38,7 +26,7 @@
 		},
 		positions = ['top', 'top-right', 'right-top', 'right', 'right-bottom', 'bottom-right', 'bottom', 'bottom-left', 'left-bottom', 'left', 'left-top', 'top-left'],
 		titles = [],
-		tooltip_tag = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title<span class="arrow">&nbsp;</span></div>';
+		tooltip_template = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title<span class="arrow">&nbsp;</span></div>';
 	//
 	//--------- --
 	//
@@ -52,27 +40,24 @@
 	}
 	//--------- --
 	//
-	function get_tooltip_tag (_event) {
-		var title = titles[_event.data.index],
-			tag;
+	function get_tooltip_template (event) {
+		var title = titles[event.data.index],tag;
 
 		if (title.length) {
-
-			tag = tooltip_tag.replace('%index', _event.data.index);
-			tag = tag.replace('%position', get_tooltip_position($(_event.target)));
+			tag = tooltip_template.replace('%index', event.data.index);
+			tag = tag.replace('%position', get_tooltip_position($(event.target)));
 			tag = tag.replace('%title', title);
-
 			return tag;
 		}
 		return false;
 	}
 	//--------- --
 	//
-	function mouse_over (_event) {
+	function mouse_over (event) {
 
 		var element = $(this),
-			tooltip_id = '#simple-tooltip-' + _event.data.index,
-			tag = get_tooltip_tag(_event),
+			tooltip_id = '#simple-tooltip-' + event.data.index,
+			tag = get_tooltip_template(event),
 			fade = parse_element_data(element, 'fade');
 
 		if (tag) {
@@ -80,7 +65,7 @@
 			var exist = $('body').find(tooltip_id);
 
 			if (exist.length) {
-				_event.preventDefault();
+				event.preventDefault();
 				return false;
 			}
 
@@ -95,14 +80,15 @@
 				tooltip.show();
 			}
 		}
-		_event.preventDefault();
+
+		event.preventDefault();
 	}
 	//--------- --
 	//
-	function mouse_out (_event) {
-		_event.preventDefault();
+	function mouse_out (event) {
+		event.preventDefault();
 
-		var tooltip = $('body').find('#simple-tooltip-'+_event.data.index),
+		var tooltip = $('body').find('#simple-tooltip-'+event.data.index),
 			fade = parse_element_data($(this), 'fade');
 		//
 		if (tooltip.length === 0) {
@@ -123,6 +109,7 @@
 	//--------- --
 	//
 	function parse_element_data (element, data_name) {
+
 		var attribute_var = 'simpletooltip-' + data_name.replace('_', '-');
 
 		if (element.data(attribute_var)) {
@@ -137,6 +124,7 @@
 	//--------- --
 	//
 	function style_tooltip (tooltip, element) {
+
 		var pos = element.offset(),
 			arrow = tooltip.find(' > .arrow'),
 			background_color = parse_element_data(element, 'background_color'),
@@ -170,7 +158,7 @@
 					borderTopColor: arrow_color,
 					borderLeftColor: arrow_color
 				});
-			break;
+				break;
 			case 'right-top':
 				pos.top -= parseInt( (tooltip.outerHeight() - margins.bottom), 10 );
 				pos.left += parseInt( (element.outerWidth() + margins.right), 10 );
@@ -181,7 +169,7 @@
 					borderRightColor: arrow_color,
 					borderBottomColor: arrow_color
 				});
-			break;
+				break;
 			case 'right':
 				pos.top += parseInt( ((element.outerHeight() - tooltip.outerHeight())/2), 10 );
 				pos.left += parseInt( (element.outerWidth() + margins.right), 10 );
@@ -190,7 +178,7 @@
 					borderRightColor: arrow_color,
 					marginTop: - settings.arrow_width
 				});
-			break;
+				break;
 			case 'right-bottom':
 				pos.top += parseInt( (element.outerHeight() - margins.bottom), 10 );
 				pos.left += parseInt( (element.outerWidth() + margins.right), 10 );
@@ -201,7 +189,7 @@
 					borderRightColor: arrow_color,
 					borderTopColor: arrow_color
 				});
-			break;
+				break;
 			case 'bottom-right':
 				pos.top += parseInt( (element.outerHeight() + margins.bottom), 10 );
 				pos.left += parseInt( (element.outerWidth() - margins.right - margins.border), 10 );
@@ -212,7 +200,7 @@
 					borderBottomColor: arrow_color,
 					borderLeftColor: arrow_color
 				});
-			break;
+				break;
 			case 'bottom':
 				pos.top += parseInt( (element.outerHeight() + margins.bottom), 10 );
 				pos.left += parseInt( ((element.outerWidth()-tooltip.outerWidth())/2), 10 );
@@ -221,8 +209,7 @@
 					marginLeft: - settings.arrow_width,
 					borderBottomColor: arrow_color
 				});
-
-			break;
+				break;
 			case 'bottom-left':
 				pos.top += parseInt( (element.outerHeight() + margins.bottom), 10 );
 				pos.left -= parseInt( (tooltip.outerWidth() - margins.left - margins.border), 10 );
@@ -233,7 +220,7 @@
 					borderBottomColor: arrow_color,
 					borderRightColor: arrow_color
 				});
-			break;
+				break;
 			case 'left-bottom':
 				pos.top += parseInt( (element.outerHeight() - margins.bottom), 10 );
 				pos.left -= parseInt( (tooltip.outerWidth() + margins.left), 10 );
@@ -244,7 +231,7 @@
 					borderLeftColor: arrow_color,
 					borderTopColor: arrow_color
 				});
-			break;
+				break;
 			case 'left':
 				pos.top += parseInt(  ((element.outerHeight() - tooltip.outerHeight())/2), 10 ) ;
 				pos.left -= parseInt(  (tooltip.outerWidth() + margins.left), 10 );
@@ -253,7 +240,7 @@
 					borderLeftColor: arrow_color,
 					marginTop: -settings.arrow_width
 				});
-			break;
+				break;
 			case 'left-top':
 				pos.top -= parseInt( (tooltip.outerHeight() - margins.bottom), 10 );
 				pos.left -= parseInt( (tooltip.outerWidth() + margins.left), 10 );
@@ -264,7 +251,7 @@
 					borderLeftColor: arrow_color,
 					borderBottomColor: arrow_color
 				});
-			break;
+				break;
 			case 'top-left':
 				pos.top -= parseInt( (tooltip.outerHeight() + margins.bottom), 10 );
 				pos.left -= parseInt( (tooltip.outerWidth() - margins.left), 10 );
@@ -275,7 +262,7 @@
 					borderTopColor: arrow_color,
 					borderRightColor: arrow_color
 				});
-			break;
+				break;
 			// top case
 			default:
 				pos.top -= parseInt( (tooltip.outerHeight() + margins.top), 10 );
@@ -311,7 +298,6 @@
 	$.simpletooltip = function(_settings) {
 		//---
 		settings = $.extend(defaults, _settings);
-		_debug(settings);
 		//---
 		add_actions();
 	};

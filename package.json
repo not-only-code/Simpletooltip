@@ -1,0 +1,28 @@
+{
+	"name": "Simpletooltip",
+	"version": "1.3.0",
+	"description": "Simpletooltip is a JQuery plugin, thought to insert short tooltips to any element of your website more easily",
+	"homepage": "http://not-only-code.github.com/Simpletooltip",
+	"private": false,
+	"license": "MIT",
+	"author": {
+		"name": "Carlos Sanz Garcia",
+		"email": "carlos.sanz@gmail.com",
+		"web": "http://codingsomething.wordpress.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:not-only-code/Simpletooltip.git"
+	},
+	"dependencies": {
+    	"jquery": ">=1.7"
+  	},
+	"devDependencies": {
+		"grunt": "*",
+		"grunt-contrib-less": "*",
+		"grunt-contrib-jshint": "*",
+		"grunt-contrib-copy": "*",
+		"grunt-contrib-uglify": "*",
+		"grunt-contrib-watch": "*"
+	}
+}
