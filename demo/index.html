@@ -28,9 +28,7 @@
 		jQuery(document).ready(function($) {
 			$.simpletooltip({
 				background_color: 'rgba(0,0,0,0.8)',
-				color: 'white',
-				border_width: 'none',
-				fade: false
+				color: 'white'
 			});
 		});
 	</script>
@@ -40,7 +38,7 @@
 <body>
 	<div id="header">
 		<div class="wrapper">
-			<h1 class="simpletooltip right" title="Just works! cool :)" data-simpletooltip-background-color="#002288" data-simpletooltip-border-color="#FF00CC">Simpletooltip</h1>
+			<h1 class="simpletooltip" title="Just works! cool :)" data-simpletooltip-position="right" data-simpletooltip-theme="white">Simpletooltip</h1>
 			<a href="http://jquery.org/" class="jquery" target="_blank"><img src="images/jquery.png" width="120"/></a>
 		</div>
 	</div>
@@ -59,13 +57,12 @@
 			<h2><a name="features" href="#features">Features:</a></h2>
 
 			<ul>
-				<li>Jquery based</li>
-				<li>Minimal configuration</li>
-				<li>12 functional positions</li>
-				<li>Customizable: colors, border and size</li>
-				<li>Use "title" attribute</li>
-				<li>Cross-browser</li>
-				<li>Lightweight: 5Kb</li>
+                <li>Minimal configuration</li>
+                <li>no extra html structures, use "title" attribute</li>
+                <li>12 functional positions</li>
+                <li>highly customizable: parameters and themes</li>
+                <li>cross-browser</li>
+                <li>lightweight, less than 5Kb</li>
 			</ul>
 			
 			<!-- 
@@ -106,27 +103,111 @@
 				<h1 class="simpletooltip" title="Simple tooltip text">Simple text</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<h1 class="simpletooltip" title="list options:<br /><ul><li>first option</li><li>second option</li><li>third option</li></ul>">Lists</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<h1 class="simpletooltip" title="<img src='images/landmarkup-icon.png' width='100' height='100' />">Images</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<h1 class="simpletooltip" title="<h4 style='margin-bottom: 0px'>Simpletooltip</h4>">Custom fonts</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h1 class="simpletooltip" title="<h4 style='margin-bottom: 0px'>Weah!</h4>">Custom fonts</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 		</div>
 		
 		<div class="article parameters">
 			<h2><a name="parameters" href="#parameters">Parameters:</a></h2>
-			<p>You can pass some <em>global</em> parameters. This will set up all tooltips</p>
-			<code>
-				&lt;script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;jQuery(document).ready(function($) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.simpletooltip({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border_color: 'purple',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: '#FFFFFF',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background_color: 'rgba(125,100,230, 0.5)',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border_width: 4<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br />&nbsp;&nbsp;&nbsp;&nbsp;});<br />&lt;/script&gt;
-			</code>
-			<p>The parameters available are:</p>
-			<dl>
-				<dt><strong>color</strong>:</dt>
-				<dd>Color of text inside the box: hex <em>#FFFFFF</em>, rgba <em>rgba(125,100, 230,0.5)</em> or string <em>'purple'</em>.</dd>
-				<dt><strong>background_color</strong>:</dt>
-				<dd>Color of background of the box: hex <em>#FFFFFF</em>, rgba <em>rgba(125,100, 230,0.5)</em> or string <em>'purple'</em>.</dd>
-				<dt><strong>border_color</strong>:</dt>
-				<dd>Color of the box border: hex <em>#FFFFFF</em>, rgba <em>rgba(125,100, 230,0.5)</em> or string <em>'purple'</em>.</dd>
-				<dt><strong>border_width</strong>:</dt>
-				<dd>Width of box border (in pixels): number <em>4</em>, string <em>'4px'</em>. Also you can set up a no border with: <em>0</em> or <em>'none'</em></dd>
-			</dl>
+			<p>You can add some <em>parameters</em> to customize your tooltips:</p>
+
+            <table class="datasheet">
+                <thead>
+                    <tr>
+                        <th>attribute</th>
+                        <th>description</th>
+                        <th class="values">values</th>
+                        <th>default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>position</strong></td>
+                        <td>position of tooltip in relation with the element</td>
+                        <td class="values">
+                            <strong>top</strong>, <strong>top-left</strong>, <strong>left-top</strong>, <strong>left</strong>, <strong>left-bottom</strong>, <strong>bottom-left</strong>, <strong>bottom</strong>, <strong>bottom-right</strong>, <strong>right-bottom</strong>, <strong>right</strong>, <strong>right-top</strong>, <strong>top-right</strong>
+                        </td>
+                        <td>top</td>
+                        
+                    </tr>
+                    <tr>
+                        <td><strong>color</strong></td>
+                        <td>color of text inside the box</td>
+                        <td class="values">
+                            hex <strong>#FFFFFF</strong>,<br>
+                            rgba <strong>'rgba(255, 255, 255, 0.5)'</strong>,<br>
+                            string <strong>'white'</strong>
+                        </td>
+                        <td><strong>#CCCCCC</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>background_color</strong></td>
+                        <td>color of background of the box</td>
+                        <td class="values">
+                            hex <strong>#000000</strong>,<br>
+                            rgba <strong>'rgba(0,0,0,0.5)'</strong>,<br>
+                            string <strong>'black'</strong>
+                        </td>
+                        <td><strong>#222222</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>border_color</strong></td>
+                        <td>color of the box border</td>
+                        <td class="values">
+                            hex <strong>#333333</strong>,<br>
+                            rgba <strong>'rgba(80, 80, 80, 0.5)'</strong>,<br>
+                            string <strong>'gray'</strong>
+                        </td>
+                        <td><strong>#111111</strong></td>
+                        
+                    </tr>
+                    <tr>
+                        <td><strong>border_width</strong></td>
+                        <td>Width of box border (in pixels)</td>
+                        <td class="values">
+                            number <strong>4</strong>,<br>
+                            string <strong>4px</strong>,<br>
+                            without border <strong>0</strong>, <strong>'none'</strong>
+                        </td>
+                        <td><strong>4px</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>arrow_width</strong></td>
+                        <td>Size of the arrow (in pixels)</td>
+                        <td class="values">
+                            number <strong>4</strong>,<br>
+                            string <strong>4px</strong>
+                        </td>
+                        <td><strong>6px</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>fade</strong></td>
+                        <td>the animation when appears</td>
+                        <td class="values">
+                            <strong>true</strong> / <strong>false</strong>
+                        </td>
+                        <td><strong>true</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>max_width</strong></td>
+                        <td>limit of the box width</td>
+                        <td class="values">
+                            number <strong>200</strong>,<br>
+                            string <strong>'200px'</strong>
+                        </td>
+                        <td><strong>'200px'</strong></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+			<p>&clubs; You can add it globally, witch affects all tooltips in your page:</p>
+            <code>
+                &lt;script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;jQuery(document).ready(function($) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.simpletooltip({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: 'right',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border_color: 'purple',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: '#FFFFFF',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background_color: 'rgba(125,100,230, 0.5)',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border_width: 4<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br />&nbsp;&nbsp;&nbsp;&nbsp;});<br />&lt;/script&gt;
+            </code>
+            <p>&clubs; Or be more specific and add it only to 1 tooltip using <em>data</em> attribute:</p>
+            <code>
+                &lt;h1 class=&quot;simpletooltip&quot; data-simpletooltip-color=&quot;#FF0055&quot;&gt;my title&lt;/h1&gt;
+            </code>
 		</div>
 		
 		<div class="article">
@@ -136,49 +217,49 @@
 			<p>To add the desired position, add the position name class:</p>
 			
 			<code>
-				&lt;div class=&quot;simpletooltip right-top&quot;&gt;right top&lt;/div&gt;
+				&lt;div class=&quot;simpletooltip&quot; data-simpletooltip-position=&quot;right-top&quot;&gt;right top&lt;/div&gt;
 			</code>
 			
 			<p>&clubs; example:</p>
 			
 			<div class="example">
-				<div class="small-area simpletooltip top" title="located on right and top">top</div>
-				<div class="small-area simpletooltip top-right" title="located on right and top">top-right</div>
-				<div class="small-area simpletooltip right-top" title="located on right and top">right-top</div>
-				<div class="small-area simpletooltip right" title="located on right and top">right</div>
-				<div class="small-area simpletooltip right-bottom" title="located on right and top">right-bottom</div>
-				<div class="small-area simpletooltip bottom-right last-child" title="located on right and top">bottom-right</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="top" title="located on top">top</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="top-right" title="located on top and right">top-right</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="right-top" title="located on right and top">right-top</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="right" title="located on right">right</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="right-bottom" title="located on right and bottom">right-bottom</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="bottom-right" title="located on bottom and right">bottom-right</div>
 			</div>
 
 			<div class="example">
-				<div class="small-area simpletooltip bottom" title="located on right and top">bottom</div>
-				<div class="small-area simpletooltip bottom-left" title="located on right and top">bottom-left</div>
-				<div class="small-area simpletooltip left-bottom" title="located on right and top">left-bottom</div>
-				<div class="small-area simpletooltip left" title="located on right and top">left</div>
-				<div class="small-area simpletooltip left-top" title="located on top and left">left-top</div>
-				<div class="small-area simpletooltip top-left last-child" title="located on top and left">top-left</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="bottom" title="located on bottom">bottom</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="bottom-left" title="located on bottom and left">bottom-left</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="left-bottom" title="located on left and bottom">left-bottom</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="left" title="located on left">left</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="left-top" title="located on left and top">left-top</div>
+				<div class="small-area simpletooltip" data-simpletooltip-position="top-left" title="located on top and left">top-left</div>
 			</div>
 			
 		</div>
 		
 		<div class="article">
 			
-			<h2><a name="color-themes" href="#color-themes">Color themes:</a></h2>
+			<h2><a name="color-themes" href="#color-themes">Themes (default configurations)</a></h2>
 			
 			<p>Simpletooltip has 4 color themes, the default theme is <em>seablue</em>, you can choose: <em>seablue</em>, <em>pastelblue</em>, <em>darkgray</em>, <em>lightgray</em>.</p>
 			
 			<p>To add the desired theme, add the theme name class:</p>
 			<code>
-				&lt;img src=&quot;images/themesample-seablue.png&quot; class=&quot;simpletooltip seablue&quot; title=&quot;Seablue Theme&quot;  /&gt;
+				&lt;img src=&quot;images/themesample-seablue.png&quot; class=&quot;simpletooltip&quot; data-simpletooltip-theme=&quot;blue&quot; title=&quot;Seablue Theme&quot;  /&gt;
 			</code>
 			
 			<p>&clubs; example:</p>
 			
 			<div class="example">
-				<img src="images/themesample-seablue.png" class="simpletooltip" title="Seablue Theme" style="background-color:#e8f3f6"/>
-				<img src="images/themesample-pastelblue.png" class="simpletooltip pastelblue" title="Pastelblue Theme" style="background-color:#6d7988"/>
-				<img src="images/themesample-darkgray.png" class="simpletooltip darkgray" title="Darkgray Theme" style="background-color: #9da281"/>
-				<img src="images/themesample-lightgray.png" class="simpletooltip lightgray" title="Lightgray Theme" style="background-color: #00619e; margin-right:0"/>
+				<img src="images/themesample-seablue.png" class="simpletooltip" title="Theme: blue" data-simpletooltip-theme="blue" style="background-color:#e8f3f6"/>
+				<img src="images/themesample-pastelblue.png" class="simpletooltip" title="Theme: white" data-simpletooltip-theme="white" style="background-color:#6d7988"/>
+				<img src="images/themesample-darkgray.png" class="simpletooltip" title="Theme: dark" data-simpletooltip-theme="dark" style="background-color: #9da281"/>
+				<img src="images/themesample-lightgray.png" class="simpletooltip" title="Theme: gray" data-simpletooltip-theme="gray" style="background-color: #00619e; margin-right:0"/>
 			</div>
 			
 		</div>

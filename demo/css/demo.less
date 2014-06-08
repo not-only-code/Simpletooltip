@@ -111,7 +111,7 @@ code,
 	position: relative;
 	display: block;
 	padding: 20px;
-	font-family: 'Monospace';
+	font-family: 'Consolas', 'Lucida Console', 'Courier' !important;
 	border: 1px dashed #888;
 	background-color: white;
 	color: @code-text-color;
@@ -380,6 +380,44 @@ ul li {
 .features-image {
 	float: right;
 	margin-right: 20px;
+}
+
+
+/*------------- tables -------------*/
+
+.datasheet {
+  width: 100%;
+  font: normal 1em/1.4em Helvetica, Arial, Sans-serif;
+  border-collapse: collapse;
+  vertical-align: middle;
+  border-spacing: 0;
+  margin-bottom: 30px;
+}
+
+.datasheet strong {
+  font-style: normal;
+}
+
+.datasheet th,
+.datasheet td {
+  text-align: left;
+  padding: 6px;
+  vertical-align: middle;
+}
+
+.datasheet th.values,
+.datasheet td.values {
+  width: 40%;
+}
+
+.datasheet th {
+  color: #0085bc;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.datasheet tr:nth-child(odd) td {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 /* -------- examples  ------- */
