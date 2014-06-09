@@ -17,12 +17,22 @@ module.exports = function (grunt) {
         },
         less: {
             dev: {
-                options: { cleancss: false },
-                files: { 'dist/css/stylesheet.css': 'src/css/simpletooltip.less' }
+                options: {
+                    cleancss: false
+                },
+                files: { 
+                    'dist/css/simpletooltip.css': 'src/css/simpletooltip.less',
+                    'demo/css/demo.css': 'demo/css/demo.less' 
+                }
             },
             production: {
-                options: { cleancss: true },
-                files: { 'dist/css/stylesheet.min.css': 'src/css/stylesheet.less' }
+                options: {
+                    cleancss: true
+                },
+                files: {
+                    'dist/css/simpletooltip.min.css': 'src/css/simpletooltip.less',
+                    'demo/css/demo.min.css': 'demo/css/demo.less'
+                }
             }
         },
         jshint: {
@@ -56,17 +66,16 @@ module.exports = function (grunt) {
                 tasks: ['jshint', 'uglify']
             },
             css: {
-                files: ['src/css/*.less'],
+                files: ['src/css/*.less', 'demo/css/*.less'],
                 tasks: ['less']
             }
         }
     });
 
-    /*grunt.loadNpmTasks('grunt-contrib-less');*/
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    //grunt.registerTask('default', ['less', 'jshint', 'uglify', 'watch']);
-    grunt.registerTask('default', [ 'jshint', 'uglify', 'watch']);
+    grunt.registerTask('default', ['less', 'jshint', 'uglify', 'watch']);
 };

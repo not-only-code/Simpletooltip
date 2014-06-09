@@ -110,9 +110,9 @@ You can download the plugin (zip format) [from here](https://github.com/not-only
 
 ### v1.3.0 (15.06.2014)
 
-* added grunt/npm install/compile system
+* added npm, grunt and bower in order to automatize and build all scripts
 * new: parameters. You can pass some parameters to adjust size, border, colors, animation, arrow size, etc.
-* new: color schemes. 4 default configurations you can customize: dark, gray, white, blue. 
+* new: color schemes. 4 default configurations you can customize: dark, gray, white, blue. Add your own color scheme. 
 * tweak: arrow images are removed, now are css based
 * tweak: change style system, use .less instead .css
 * tweak: files restructured
