@@ -57,7 +57,7 @@
 		var attribute = 'simpletooltip-' + attribute_name.replace('_', '-'),
 			theme;
 
-		if ($element.data(attribute)) {
+		if ($element.data(attribute) !== undefined) {
 			return $element.data(attribute);
 		}
 
@@ -78,7 +78,7 @@
 	function getTemplate (event) {
 		var title = titles[event.data.index], tag, $tag, $arrow;
 
-		if (title.length) {
+		if (title !== undefined && title.length) {
 			tag = tooltip_template.replace('%index', event.data.index);
 			tag = tag.replace('%title', title);
 			tag = tag.replace('%position', getAttribute($(event.currentTarget), 'position'));
@@ -102,6 +102,12 @@
 
 		if ( !($tooltip = $element.data('$simpletooltip')) ) {
 			$tooltip = getTemplate(event);
+
+			if (!$tooltip) {
+				$element.css('cursor', 'inherit');
+				return event;
+			}
+
 			$element.data('$simpletooltip', $tooltip);
 		}
 

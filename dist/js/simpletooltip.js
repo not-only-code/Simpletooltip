@@ -54,7 +54,7 @@
     }, g = [], h = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title</div>', i = '<span class="arrow">&nbsp;</span>';
     function j(a, b) {
         var d = "simpletooltip-" + b.replace("_", "-"), f;
-        if (a.data(d)) {
+        if (a.data(d) !== undefined) {
             return a.data(d);
         }
         if (f = a.data("simpletooltip-theme")) {
@@ -69,7 +69,7 @@
     }
     function k(b) {
         var c = g[b.data.index], d, e, f;
-        if (c.length) {
+        if (c !== undefined && c.length) {
             d = h.replace("%index", b.data.index);
             d = d.replace("%title", c);
             d = d.replace("%position", j(a(b.currentTarget), "position"));
@@ -85,6 +85,10 @@
         var d = a(this), e;
         if (!(e = d.data("$simpletooltip"))) {
             e = k(c);
+            if (!e) {
+                d.css("cursor", "inherit");
+                return c;
+            }
             d.data("$simpletooltip", e);
         }
         if (!e) {
