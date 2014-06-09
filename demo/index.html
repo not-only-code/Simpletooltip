@@ -14,7 +14,7 @@
 	<meta name="description" content="Simpletoolip is a Jquery plugin, thought to insert short tooltips to any element of your website more easily">
 	
 	<!-- Styles -->
-	<link rel="stylesheet" href="css/demo.css" media="screen" />
+	<link rel="stylesheet" href="css/demo.min.css" media="screen" />
 	
 	<!-- Modernizr -->
 	<script src="js/modernizr.simpletooltip.min.js"></script>
@@ -27,8 +27,18 @@
 	<script>
 		jQuery(document).ready(function($) {
 			$.simpletooltip({
-				background_color: 'rgba(0,0,0,0.8)',
-				color: 'white'
+                themes: {
+                    pink: {
+                        color: 'red',
+                        border_color: 'red',
+                        background_color: 'pink'
+                    },
+                    brazil: {
+                        color: 'yellow',
+                        background_color: 'green',
+                        border_color: 'yellow'
+                    }
+                }
 			});
 		});
 	</script>
@@ -36,13 +46,13 @@
 
 </head>
 <body>
-	<div id="header">
+	<header id="header">
 		<div class="wrapper">
 			<h1 class="simpletooltip" title="Just works! cool :)" data-simpletooltip-position="right" data-simpletooltip-theme="white">Simpletooltip</h1>
 			<a href="http://jquery.org/" class="jquery" target="_blank"><img src="images/jquery.png" width="120"/></a>
 		</div>
-	</div>
-	<div id="section">
+	</header>
+	<article id="content">
 		
 		<!--
 		<div class="article">
@@ -53,7 +63,7 @@
 		-->
 		
 		
-		<div class="article features">
+		<section class="features">
 			<h2><a name="features" href="#features">Features:</a></h2>
 
 			<ul>
@@ -69,12 +79,12 @@
 			<img class="features-image" src="images/box-design.png" alt="Box Design" />
 			-->
 			
-		</div>
+		</section>
 		
-		<div class="article">
+		<section>
 			<h2><a name="installation" href="#installation">Installation:</a></h2>
 			<p><a href="#download">Download the plugin</a> and decompress files, put the folder <em>simpletooltip</em> in your tree project files, would be nice create a folder that contains it, for example <em>js</em> (/js/simpletooltip).</p>
-			<p>In the <em>header</em> of your document attach the scripts <em>style-simpletooltip-min.css</em> and <em>jquery-simpletooltip-min.js</em>, of course, you will need load Jquery first:</p>
+			<p>In the <em>header</em> of your document attach the scripts <kdb>style-simpletooltip-min.css</kdb> and <kdb>jquery-simpletooltip-min.js</kdb>, of course, you will need load jQuery first:</p>
 			<code>
 				&lt;link rel=&quot;stylesheet&quot; href=&quot;.../simpletooltip/css/simpletooltip.min.css&quot; media=&quot;screen&quot; /&gt;<br /><br />
 				&lt;script src=&quot;http://code.jquery.com/jquery.min.js&quot;&gt;&lt;/script&gt;<br />
@@ -82,13 +92,25 @@
 			</code>
 			<p>Initialize the plugin, it will detect all tooltips marked in the page:</p>
 			<code>
-				&lt;script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;jQuery(document).ready(function($) {<br />        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.simpletooltip();<br />&nbsp;&nbsp;&nbsp;&nbsp;});<br />&lt;/script&gt;
+<pre>
+&lt;script&gt;
+    jQuery(document).ready(function($) {
+        $.simpletooltip({
+            position: 'right',
+            border_color: 'purple',
+            color: '#FFFFFF',
+            background_color: 'rgba(125,100,230, 0.5)',
+            border_width: 4
+        });
+    });
+&lt;/script&gt;
+</pre>
 			</code>
-		</div>
+		</section>
 		
-		<div class="article usage">
+		<section class="usage">
 			<h2><a name="usage" href="#usage">Usage:</a></h2>
-			<p>You can use Simpletooltip in any element easily, first declare the class <em>simpletooltip</em>, and complete the attribute <em>title</em>, that will be the content of the tooltip, for example:</p>
+			<p>You can use Simpletooltip in any element easily, first declare the class <kdb>.simpletooltip</kdb>, and complete the attribute <kdb>title</kdb>, that will be the content of the tooltip, for example:</p>
 			<code>
 				&lt;h1 class=&quot;simpletooltip&quot; title=&quot;And this is his tooltip&quot;&gt;_This is a page title&lt;/h1&gt;
 			</code>
@@ -105,9 +127,9 @@
 				<h1 class="simpletooltip" title="<img src='images/landmarkup-icon.png' width='100' height='100' />">Images</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<h1 class="simpletooltip" title="<h4 style='margin-bottom: 0px'>Weah!</h4>">Custom fonts</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
-		</div>
+		</section>
 		
-		<div class="article parameters">
+		<section class="parameters">
 			<h2><a name="parameters" href="#parameters">Parameters:</a></h2>
 			<p>You can add some <em>parameters</em> to customize your tooltips:</p>
 
@@ -115,104 +137,102 @@
                 <thead>
                     <tr>
                         <th>attribute</th>
-                        <th>description</th>
+                        <th class="description">description</th>
                         <th class="values">values</th>
                         <th>default</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>position</strong></td>
-                        <td>position of tooltip in relation with the element</td>
+                        <td><kdb>position</kdb></td>
+                        <td class="description">position of tooltip in relation with the element</td>
                         <td class="values">
-                            <strong>top</strong>, <strong>top-left</strong>, <strong>left-top</strong>, <strong>left</strong>, <strong>left-bottom</strong>, <strong>bottom-left</strong>, <strong>bottom</strong>, <strong>bottom-right</strong>, <strong>right-bottom</strong>, <strong>right</strong>, <strong>right-top</strong>, <strong>top-right</strong>
+                            <kdb>top</kdb>, <kdb>top-left</kdb>, <kdb>left-top</kdb>, <kdb>left</kdb>, <kdb>left-bottom</kdb>, <kdb>bottom-left</kdb>, <kdb>bottom</kdb>, <kdb>bottom-right</kdb>, <kdb>right-bottom</kdb>, <kdb>right</kdb>, <kdb>right-top</kdb>, <kdb>top-right</kdb>
                         </td>
-                        <td>top</td>
-                        
+                        <td><kdb>top</kdb></td>
                     </tr>
                     <tr>
-                        <td><strong>color</strong></td>
-                        <td>color of text inside the box</td>
+                        <td><kdb>color</kdb></td>
+                        <td class="description">color of text inside the box</td>                        
                         <td class="values">
-                            hex <strong>#FFFFFF</strong>,<br>
-                            rgba <strong>'rgba(255, 255, 255, 0.5)'</strong>,<br>
-                            string <strong>'white'</strong>
+                            <kdb>#FFFFFF</kdb> / 
+                            <kdb>'rgba(255, 255, 255, 0.5)'</kdb> / 
+                            <kdb>'white'</kdb>
                         </td>
-                        <td><strong>#CCCCCC</strong></td>
+                        <td><kdb>#CCCCCC</kdb></td>
                     </tr>
                     <tr>
-                        <td><strong>background_color</strong></td>
-                        <td>color of background of the box</td>
+                        <td><kdb>background_color</kdb></td>
+                        <td class="description">color of background of the box</td>
                         <td class="values">
-                            hex <strong>#000000</strong>,<br>
-                            rgba <strong>'rgba(0,0,0,0.5)'</strong>,<br>
-                            string <strong>'black'</strong>
+                            <kdb>#000000</kdb> /
+                            <kdb>'rgba(0, 0, 0, 0.5)'</kdb> /
+                            <kdb>'black'</kdb>
                         </td>
-                        <td><strong>#222222</strong></td>
+                        <td><kdb>#222222</kdb></td>
                     </tr>
                     <tr>
-                        <td><strong>border_color</strong></td>
-                        <td>color of the box border</td>
+                        <td><kdb>border_color</kdb></td>
+                        <td class="description">color of the box border</td>
                         <td class="values">
-                            hex <strong>#333333</strong>,<br>
-                            rgba <strong>'rgba(80, 80, 80, 0.5)'</strong>,<br>
-                            string <strong>'gray'</strong>
+                            <kdb>#333333</kdb> / 
+                            <kdb>'rgba(80, 80, 80, 0.5)'</kdb> / 
+                            <kdb>'gray'</kdb>
                         </td>
-                        <td><strong>#111111</strong></td>
-                        
+                        <td><kdb>#111111</kdb></td>
                     </tr>
                     <tr>
-                        <td><strong>border_width</strong></td>
-                        <td>Width of box border (in pixels)</td>
+                        <td><kdb>border_width</kdb></td>
+                        <td class="description">Width of box border (in pixels)</td>
                         <td class="values">
-                            number <strong>4</strong>,<br>
-                            string <strong>4px</strong>,<br>
-                            without border <strong>0</strong>, <strong>'none'</strong>
+                            <kdb>4</kdb> / 
+                            <kdb>4px</kdb> / 
+                            <kdb>0</kdb> <kdb>'none'</kdb>
                         </td>
-                        <td><strong>4px</strong></td>
+                        <td><kdb>4px</kdb></td>
                     </tr>
                     <tr>
-                        <td><strong>arrow_width</strong></td>
-                        <td>Size of the arrow (in pixels)</td>
+                        <td><kdb>arrow_width</kdb></td>
+                        <td class="description">Size of the arrow (in pixels)</td>
+                        <td><kdb>6px</kdb></td>
                         <td class="values">
-                            number <strong>4</strong>,<br>
-                            string <strong>4px</strong>
+                            <kdb>4</kdb> / 
+                            <kdb>4px</kdb>
                         </td>
-                        <td><strong>6px</strong></td>
                     </tr>
                     <tr>
-                        <td><strong>fade</strong></td>
-                        <td>the animation when appears</td>
+                        <td><kdb>fade</kdb></td>
+                        <td class="description">the animation when appears</td>
                         <td class="values">
-                            <strong>true</strong> / <strong>false</strong>
+                            <kdb>true</kdb> / <kdb>false</kdb>
                         </td>
-                        <td><strong>true</strong></td>
+                        <td><kdb>true</kdb></td>
                     </tr>
                     <tr>
-                        <td><strong>max_width</strong></td>
-                        <td>limit of the box width</td>
+                        <td><kdb>max_width</kdb></td>
+                        <td class="description">limit of the box width</td>
                         <td class="values">
-                            number <strong>200</strong>,<br>
-                            string <strong>'200px'</strong>
+                            <kdb>200</kdb> / 
+                            <kdb>'200px'</kdb>
                         </td>
-                        <td><strong>'200px'</strong></td>
+                        <td><kdb>'200px'</kdb></td>
                     </tr>
                     
                 </tbody>
             </table>
-			<p>&clubs; You can add it globally, witch affects all tooltips in your page:</p>
+			<p>You can add it globally, witch affects all tooltips in your page:</p>
             <code>
                 &lt;script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;jQuery(document).ready(function($) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.simpletooltip({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: 'right',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border_color: 'purple',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: '#FFFFFF',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background_color: 'rgba(125,100,230, 0.5)',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;border_width: 4<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br />&nbsp;&nbsp;&nbsp;&nbsp;});<br />&lt;/script&gt;
             </code>
-            <p>&clubs; Or be more specific and add it only to 1 tooltip using <em>data</em> attribute:</p>
+            <p>Or be more specific and add it only to 1 tooltip using <em>data</em> attribute:</p>
             <code>
                 &lt;h1 class=&quot;simpletooltip&quot; data-simpletooltip-color=&quot;#FF0055&quot;&gt;my title&lt;/h1&gt;
             </code>
-		</div>
+		</section>
 		
-		<div class="article">
+		<section>
 			<h2><a name="positioning" href="#positioning">Positioning:</a></h2>
-			<p>Simpletooltip has 12 funcional positions, by default is located on <em>top</em> position, you can choose: <em>top</em>, <em>top-left</em>, <em>left-top</em>, <em>left</em>, <em>left-bottom</em>, <em>bottom-left</em>, <em>bottom</em>, <em>bottom-right</em>, <em>right-bottom</em>, <em>right</em>, <em>right-top</em>, <em>top-right</em>.</p>
+			<p>Simpletooltip has 12 funcional positions, by default is located on <kdb>top</kdb> position, you can choose: <kdb>top</kdb>&nbsp; <kdb>top-left</kdb>&nbsp; <kdb>left-top</kdb>&nbsp; <kdb>left</kdb>&nbsp; <kdb>left-bottom</kdb>&nbsp; <kdb>bottom-left</kdb>&nbsp; <kdb>bottom</kdb>&nbsp; <kdb>bottom-right</kdb>&nbsp; <kdb>right-bottom</kdb>&nbsp; <kdb>right</kdb>&nbsp; <kdb>right-top</kdb>&nbsp; <kdb>top-right</kdb>.</p>
 			
 			<p>To add the desired position, add the position name class:</p>
 			
@@ -222,7 +242,7 @@
 			
 			<p>&clubs; example:</p>
 			
-			<div class="example">
+			<div class="example grid">
 				<div class="small-area simpletooltip" data-simpletooltip-position="top" title="located on top">top</div>
 				<div class="small-area simpletooltip" data-simpletooltip-position="top-right" title="located on top and right">top-right</div>
 				<div class="small-area simpletooltip" data-simpletooltip-position="right-top" title="located on right and top">right-top</div>
@@ -231,7 +251,7 @@
 				<div class="small-area simpletooltip" data-simpletooltip-position="bottom-right" title="located on bottom and right">bottom-right</div>
 			</div>
 
-			<div class="example">
+			<div class="example grid">
 				<div class="small-area simpletooltip" data-simpletooltip-position="bottom" title="located on bottom">bottom</div>
 				<div class="small-area simpletooltip" data-simpletooltip-position="bottom-left" title="located on bottom and left">bottom-left</div>
 				<div class="small-area simpletooltip" data-simpletooltip-position="left-bottom" title="located on left and bottom">left-bottom</div>
@@ -240,50 +260,103 @@
 				<div class="small-area simpletooltip" data-simpletooltip-position="top-left" title="located on top and left">top-left</div>
 			</div>
 			
-		</div>
+		</section>
 		
-		<div class="article">
+		<section>
 			
-			<h2><a name="color-themes" href="#color-themes">Themes (default configurations)</a></h2>
+			<h2><a name="color-themes" href="#color-themes">Themes</a></h2>
 			
-			<p>Simpletooltip has 4 color themes, the default theme is <em>seablue</em>, you can choose: <em>seablue</em>, <em>pastelblue</em>, <em>darkgray</em>, <em>lightgray</em>.</p>
+			<p>Themes are packages of parameters you can set up in 1 place, Simpletooltip comes with 4 default themes, you can choose: <kdb>blue</kdb>&nbsp; <kdb>white</kdb>&nbsp; <kdb>dark</kdb>&nbsp; <kdb>gray</kdb>.</p>
 			
-			<p>To add the desired theme, add the theme name class:</p>
+			<p>To add a theme&nbsp; configure <em>theme</em> parameter:</p>
 			<code>
-				&lt;img src=&quot;images/themesample-seablue.png&quot; class=&quot;simpletooltip&quot; data-simpletooltip-theme=&quot;blue&quot; title=&quot;Seablue Theme&quot;  /&gt;
+				&lt;img src=&quot;images/themesample-seablue.png&quot; class=&quot;simpletooltip&quot; data-simpletooltip-theme=&quot;blue&quot; title=&quot;blue theme&quot;  /&gt;
 			</code>
 			
 			<p>&clubs; example:</p>
 			
-			<div class="example">
+			<div class="example grid">
 				<img src="images/themesample-seablue.png" class="simpletooltip" title="Theme: blue" data-simpletooltip-theme="blue" style="background-color:#e8f3f6"/>
 				<img src="images/themesample-pastelblue.png" class="simpletooltip" title="Theme: white" data-simpletooltip-theme="white" style="background-color:#6d7988"/>
 				<img src="images/themesample-darkgray.png" class="simpletooltip" title="Theme: dark" data-simpletooltip-theme="dark" style="background-color: #9da281"/>
 				<img src="images/themesample-lightgray.png" class="simpletooltip" title="Theme: gray" data-simpletooltip-theme="gray" style="background-color: #00619e; margin-right:0"/>
 			</div>
-			
-		</div>
-		
-		<div class="article">
+
+            <p>Also you can extend it, imagine a blue theme without border:</p>
+            <code>
+                &lt;img src=&quot;images/themesample-seablue.png&quot; class=&quot;simpletooltip&quot; data-simpletooltip-theme=&quot;blue&quot; data-simpletooltip-border-width=&quot;0&quot; title=&quot;blue custom theme&quot;  /&gt;
+            </code>
+
+            <p>&clubs; example:</p>
+
+            <div class="example">
+                <h1 class="simpletooltip" data-simpletooltip-theme="blue" data-simpletooltip-border-width="0" title="blue custom theme" style="cursor: pointer;">blue theme customized</h1>
+            </div>
+
+            <p>Also you can create your own themes. Imagine you need to repeat continuously 2 schemes in your site and don't want to fill your html code with noisy variables inside data attributes. For that you can use <kdb>themes</kdb> attribute.</p>
+
+            <code>
+<pre>
+&lt;script&gt;
+    jQuery(document).ready(function($) {
+        $.simpletooltip({
+            themes: {
+                pink: {
+                    color: 'red',
+                    border_color: 'red',
+                    background_color: 'pink'
+                },
+                brazil: {
+                    color: 'yellow',
+                    background_color: 'green',
+                    border_color: 'yellow'
+                }
+            }
+        });
+    });
+&lt;/script&gt;
+</pre>
+            </code>
+
+            <p>&clubs; example:</p>
+
+
+            <div class="example">
+                <p>This is a <em class="simpletooltip" data-simpletooltip-theme="pink" title="sweet, no?">pink example</em>, and this is a <em class="simpletooltip" data-simpletooltip-theme="brazil" title="yeah, that's brazil">green one</em>.</p>
+            </div>
+		</section>
+		<!--
+		<section>
 			<h2><a name="download" href="#download">Download:</a></h2>
 			<div class="download">
 				<p>You can download the plugin (.zip compressed) <a href="https://github.com/not-only-code/Simpletooltip/zipball/master">here</a>, anyway also you can access to <a href="https://github.com/not-only-code/Simpletooltip">GitHub repo</a>.</p>
 				<p>Contribute with your ideas, new features, or bugs on <a href="https://github.com/not-only-code/Simpletooltip/issues">Git Issues</a>.</p>
 				<p>If this plugin helped you, also you can <a class="simpletooltip" title="Really, thank you!" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MRNNVK3SDEQKN">donate</a>, thank you very much.</p>
 			</div>
-		</div>
-		
-		<div id="downloadpanel">
+		</section>
+		-->
+		<section id="downloadpanel">
 			<a class="button green" href="https://github.com/not-only-code/Simpletooltip/zipball/master">download</a>
 			<p>Actual Version: 1.3</p>
-			<p>Latest Update: 08.06.2013</p>
+			<p>Latest Update: 10.06.2014</p>
 			<p>Also, you can access to <a href="https://github.com/not-only-code/Simpletooltip">Git repo</a>.</p>
 			<p>Do you have any great idea?<br />Contribute on <a href="https://github.com/not-only-code/Simpletooltip/issues">Git Issues</a></p>
 			<p>Simpletooltip helped you?</p>
-			<a class="button blue simpletooltip bottom" title="Really, thank you!" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MRNNVK3SDEQKN">donate &#x263a;</a>
-		</div>
+			<a class="button blue simpletooltip bottom" title="Really, thank you!" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MRNNVK3SDEQKN">donate <span class="icon">&#x263a;</span></a>
+		</section>
 		
-	</div>
+	</article>
+
+    <footer>
+        <div class="wrapper">
+            <section>
+                <h2><a name="download" href="#download">Download</a></h2>
+                <p>You can download the plugin (.zip compressed) <a href="https://github.com/not-only-code/Simpletooltip/zipball/master">here</a>, anyway also you can access to <a href="https://github.com/not-only-code/Simpletooltip">GitHub repo</a>.</p>
+                <p>Contribute with your ideas, new features, or bugs on <a href="https://github.com/not-only-code/Simpletooltip/issues">Git Issues</a>.</p>
+                <p>If this plugin helped you, any <a class="simpletooltip" title="Really, thank you!" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MRNNVK3SDEQKN">donation</a> will be wellcome.</p>
+            </section>
+        </div>
+    </footer>
 	
 	<a href="https://github.com/not-only-code/simpletooltip"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
 	
