@@ -62,7 +62,7 @@ module.exports = function (grunt) {
         },
         watch: {
             gruntfile: {
-                files: ['Gruntfile.js', 'src/js/simpletooltip.js'],
+                files: ['package.json', 'Gruntfile.js', 'src/js/simpletooltip.js'],
                 tasks: ['jshint', 'uglify']
             },
             css: {

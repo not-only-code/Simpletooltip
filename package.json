@@ -4,7 +4,7 @@
 	"description": "Simpletooltip is a JQuery plugin, thought to insert short tooltips to any element of your website more easily",
 	"homepage": "http://not-only-code.github.com/Simpletooltip",
 	"private": false,
-	"license": "MIT",
+	"license": "GPL-3.0",
 	"author": {
 		"name": "Carlos Sanz Garcia",
 		"email": "carlos.sanz@gmail.com",
