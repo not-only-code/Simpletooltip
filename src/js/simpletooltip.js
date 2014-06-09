@@ -1,42 +1,56 @@
+/**
+ * Simpletooltip is a JQuery plugin, thought to insert short tooltips to any element of your website more easily
+ * v1.3.0
+ *
+ * 2014 Carlos Sanz Garcia
+ * Distributed under GPL-3.0 license
+ *
+ * http://not-only-code.github.com/Simpletooltip
+ */
+
 (function($) {
+	"use strict";
+
 	var $body = null,
 		themes = {
 			dark: {
 				color: '#CCCCCC',
 				background_color: '#222222',
 				border_color: '#111111',
-				border_width: 4
+				border_width: 4,
 			},
 			gray: {
 				color: '#434343',
 				background_color: '#DCDCDC',
 				border_color: '#BABABA',
-				border_width: 4
+				border_width: 4,
 			},
 			white: {
 				color: '#6D7988',
 				background_color: '#CCDEF2',
 				border_color: '#FFFFFF',
-				border_width: 4
+				border_width: 4,
 			},
 			blue: {
 				color: '#FFFFFF',
 				background_color: '#0088BE',
 				border_color: '#00669C',
-				border_width: 4
+				border_width: 4,
 			}
 		},
 		defaults = {
 			position: 'top',
 			theme: 'dark',
-			border_width: 2,
+			color: '#DDDDDD',
+			background_color: '#222222',
+			border_width: 0,
 			arrow_width: 6,
 			padding: {
 				width: 8,
 				height: 6
 			},
 			max_width: 200,
-			fade: true,
+			fade: true
 		},
 		settings,
 		margins = {
@@ -46,7 +60,7 @@
 			bottom: 15,
 			left: 15
 		},
-		titles = [],
+		index = 0,
 		tooltip_template = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title</div>',
 		arrow_template = '<span class="arrow">&nbsp;</span>';
 	//
@@ -61,13 +75,13 @@
 			return $element.data(attribute);
 		}
 
-		if (theme = $element.data('simpletooltip-theme')) {
-			if (themes[theme] && themes[theme][attribute_name]) {
+		if ( (theme = $element.data('simpletooltip-theme')) !== undefined ) {
+			if (themes[theme] !== undefined && themes[theme][attribute_name] !== undefined) {
 				return themes[theme][attribute_name];
 			}
 		}
 
-		if (settings[attribute_name]) {
+		if (settings[attribute_name] !== undefined) {
 			return settings[attribute_name];
 		}
 
@@ -75,12 +89,13 @@
 	}
 	//--------- --
 	//
-	function getTemplate (event) {
-		var title = titles[event.data.index], tag, $tag, $arrow;
+	function buildTooltip (event) {
+		var tag, $tag, $arrow;
 
-		if (title !== undefined && title.length) {
-			tag = tooltip_template.replace('%index', event.data.index);
-			tag = tag.replace('%title', title);
+		if (event.data.title !== undefined && event.data.title.length) {
+			tag = tooltip_template.replace('%index', index);
+			index++;
+			tag = tag.replace('%title', event.data.title);
 			tag = tag.replace('%position', getAttribute($(event.currentTarget), 'position'));
 
 			$tag = $(tag);
@@ -98,10 +113,10 @@
 	//
 	function mouseOver (event) {
 
-		var $element = $(this), $tooltip;
+		var $element = $(event.currentTarget), $tooltip;
 
 		if ( !($tooltip = $element.data('$simpletooltip')) ) {
-			$tooltip = getTemplate(event);
+			$tooltip = buildTooltip(event);
 
 			if (!$tooltip) {
 				$element.css('cursor', 'inherit');
@@ -111,18 +126,16 @@
 			$element.data('$simpletooltip', $tooltip);
 		}
 
-		if (!$tooltip) {
-			return event;
-		}
-
 		// change this for something like $body.has()
 		if ($body.find('#' + $tooltip.attr('id')).length) {
+			console.log('exist', $tooltip.attr('id'));
 			return event;
 		}
 
 		$body.append($tooltip);
 
 		$tooltip.hide();
+
 		styleTooltip($element);
 
 		if (getAttribute($element, 'fade')) {
@@ -137,7 +150,7 @@
 	//
 	function mouseOut (event) {
 
-		var $element = $(this), $tooltip;
+		var $element = $(event.currentTarget), $tooltip;
 		
 		if ( !($tooltip = $element.data('$simpletooltip')) ) {
 			return event;
@@ -176,13 +189,16 @@
 			border_color = getAttribute($element, 'border_color');
 		
 		var border_width = getAttribute($element, 'border_width');
-		border_width = (typeof(border_width) === 'boolean' || border_width === 'none') ? 0 : Number(border_width);
+
+		border_width = (!border_color || typeof(border_width) === 'boolean' || border_width === 'none') ? 0 : Number(border_width);
 		
-		var arrow_color = (!border_width) ? background_color : border_color;
+		var arrow_color = (!border_width || !border_color) ? background_color : border_color;
 		
 		var arrow_side_width = Math.round((settings.arrow_width * 3) / 4),
 			arrow_position = -parseInt( ((settings.arrow_width * 2) + border_width), 10 ),
 			arrow_side_position = -parseInt( ((arrow_side_width * 2) + border_width), 10 );
+
+		console.log('color', arrow_color);
 		
 		var tooltip_attributes = {
 			maxWidth: getAttribute($element, 'max_width'),
@@ -334,9 +350,13 @@
 
 		settings = $.extend(defaults, _settings);
 
-		var theme = themes[settings.theme];
-		if (theme !== 'undefined') {
-			settings = $.extend(settings, theme);
+		if ( settings['themes'] !== undefined  && typeof(settings.themes) === 'object') {
+			themes = $.extend(themes, settings.themes);
+			delete(settings.themes);
+		}
+
+		if (themes[settings.theme] !== undefined) {
+			settings = $.extend(settings, themes[settings.theme]);
 		}
 	}
 	//--------- --
@@ -344,13 +364,11 @@
 	function addActions () {
 		$('.simpletooltip').each(function(index) {
 			var $this = $(this);
-			$this.css('cursor', 'pointer');
 
-			titles[index] = $this.attr('title');
+			$this.on('mouseenter', {title: $this.attr('title')}, mouseOver);
+			$this.on('mouseleave', {title: $this.attr('title')}, mouseOut);
+
 			$this.attr('title', '');
-
-			$this.on('mouseenter', {index:index}, mouseOver);
-			$this.on('mouseleave', {index:index}, mouseOut);
 		});
 	}
 	//

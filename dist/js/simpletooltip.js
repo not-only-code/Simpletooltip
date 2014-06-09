@@ -3,12 +3,13 @@
  * v1.3.0
  *
  * 2014 Carlos Sanz Garcia
- * Distributed under MIT license
+ * Distributed under GPL-3.0 license
  *
  * http://not-only-code.github.com/Simpletooltip
  */
 
 (function(a) {
+    "use strict";
     var b = null, c = {
         dark: {
             color: "#CCCCCC",
@@ -37,7 +38,9 @@
     }, d = {
         position: "top",
         theme: "dark",
-        border_width: 2,
+        color: "#DDDDDD",
+        background_color: "#222222",
+        border_width: 0,
         arrow_width: 6,
         padding: {
             width: 8,
@@ -51,38 +54,39 @@
         right: 15,
         bottom: 15,
         left: 15
-    }, g = [], h = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title</div>', i = '<span class="arrow">&nbsp;</span>';
+    }, g = 0, h = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title</div>', i = '<span class="arrow">&nbsp;</span>';
     function j(a, b) {
         var d = "simpletooltip-" + b.replace("_", "-"), f;
         if (a.data(d) !== undefined) {
             return a.data(d);
         }
-        if (f = a.data("simpletooltip-theme")) {
-            if (c[f] && c[f][b]) {
+        if ((f = a.data("simpletooltip-theme")) !== undefined) {
+            if (c[f] !== undefined && c[f][b] !== undefined) {
                 return c[f][b];
             }
         }
-        if (e[b]) {
+        if (e[b] !== undefined) {
             return e[b];
         }
         return false;
     }
     function k(b) {
-        var c = g[b.data.index], d, e, f;
-        if (c !== undefined && c.length) {
-            d = h.replace("%index", b.data.index);
-            d = d.replace("%title", c);
-            d = d.replace("%position", j(a(b.currentTarget), "position"));
-            e = a(d);
-            f = a(i);
-            e.append(f);
-            e.$arrow = f;
-            return e;
+        var c, d, e;
+        if (b.data.title !== undefined && b.data.title.length) {
+            c = h.replace("%index", g);
+            g++;
+            c = c.replace("%title", b.data.title);
+            c = c.replace("%position", j(a(b.currentTarget), "position"));
+            d = a(c);
+            e = a(i);
+            d.append(e);
+            d.$arrow = e;
+            return d;
         }
         return false;
     }
     function l(c) {
-        var d = a(this), e;
+        var d = a(c.currentTarget), e;
         if (!(e = d.data("$simpletooltip"))) {
             e = k(c);
             if (!e) {
@@ -91,10 +95,8 @@
             }
             d.data("$simpletooltip", e);
         }
-        if (!e) {
-            return c;
-        }
         if (b.find("#" + e.attr("id")).length) {
+            console.log("exist", e.attr("id"));
             return c;
         }
         b.append(e);
@@ -108,7 +110,7 @@
         return c;
     }
     function m(c) {
-        var d = a(this), e;
+        var d = a(c.currentTarget), e;
         if (!(e = d.data("$simpletooltip"))) {
             return c;
         }
@@ -134,9 +136,10 @@
         }
         var c = b.data("$simpletooltip"), d = b.offset(), g = c.$arrow ? c.$arrow : c.find(" > .arrow"), h = j(b, "background_color"), i = j(b, "border_color");
         var k = j(b, "border_width");
-        k = typeof k === "boolean" || k === "none" ? 0 : Number(k);
-        var l = !k ? h : i;
+        k = !i || typeof k === "boolean" || k === "none" ? 0 : Number(k);
+        var l = !k || !i ? h : i;
         var m = Math.round(e.arrow_width * 3 / 4), n = -parseInt(e.arrow_width * 2 + k, 10), o = -parseInt(m * 2 + k, 10);
+        console.log("color", l);
         var p = {
             maxWidth: j(b, "max_width"),
             backgroundColor: h,
@@ -289,23 +292,24 @@
     function o(f) {
         b = a("body");
         e = a.extend(d, f);
-        var g = c[e.theme];
-        if (g !== "undefined") {
-            e = a.extend(e, g);
+        if (e["themes"] !== undefined && typeof e.themes === "object") {
+            c = a.extend(c, e.themes);
+            delete e.themes;
+        }
+        if (c[e.theme] !== undefined) {
+            e = a.extend(e, c[e.theme]);
         }
     }
     function p() {
         a(".simpletooltip").each(function(b) {
             var c = a(this);
-            c.css("cursor", "pointer");
-            g[b] = c.attr("title");
-            c.attr("title", "");
             c.on("mouseenter", {
-                index: b
+                title: c.attr("title")
             }, l);
             c.on("mouseleave", {
-                index: b
+                title: c.attr("title")
             }, m);
+            c.attr("title", "");
         });
     }
     a.simpletooltip = function(a) {

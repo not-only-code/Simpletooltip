@@ -1,3 +1,15 @@
+/**
+ * Simpletooltip is a JQuery plugin, thought to insert short tooltips to any element of your website more easily
+ * v1.3.0
+ *
+ * 2014 Carlos Sanz Garcia
+ * Distributed under GPL-3.0 license
+ *
+ * http://not-only-code.github.com/Simpletooltip
+ */
+.simpletooltip {
+  cursor: pointer;
+}
 .simple-tooltip {
   position: absolute;
   display: block;
