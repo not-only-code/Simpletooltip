@@ -10,7 +10,7 @@
 
 (function(a) {
     "use strict";
-    var b = null, c = {
+    var b, c = null, d = {
         dark: {
             color: "#CCCCCC",
             background_color: "#222222",
@@ -35,9 +35,8 @@
             border_color: "#00669C",
             border_width: 4
         }
-    }, d = {
+    }, e = {
         position: "top",
-        theme: "dark",
         color: "#DDDDDD",
         background_color: "#222222",
         border_width: 0,
@@ -48,272 +47,289 @@
         },
         max_width: 200,
         fade: true
-    }, e, f = {
-        border: 6,
-        top: 15,
-        right: 15,
-        bottom: 15,
-        left: 15
-    }, g = 0, h = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title</div>', i = '<span class="arrow">&nbsp;</span>';
-    function j(a, b) {
-        var d = "simpletooltip-" + b.replace("_", "-"), f;
-        if (a.data(d) !== undefined) {
-            return a.data(d);
-        }
-        if ((f = a.data("simpletooltip-theme")) !== undefined) {
-            if (c[f] !== undefined && c[f][b] !== undefined) {
-                return c[f][b];
-            }
-        }
-        if (e[b] !== undefined) {
-            return e[b];
-        }
-        return false;
-    }
-    function k(b) {
-        var c, d, e;
-        if (b.data.title !== undefined && b.data.title.length) {
-            c = h.replace("%index", g);
-            g++;
-            c = c.replace("%title", b.data.title);
-            c = c.replace("%position", j(a(b.currentTarget), "position"));
-            d = a(c);
-            e = a(i);
-            d.append(e);
-            d.$arrow = e;
-            return d;
-        }
-        return false;
-    }
-    function l(c) {
-        var d = a(c.currentTarget), e;
-        if (!(e = d.data("$simpletooltip"))) {
-            e = k(c);
-            if (!e) {
-                d.css("cursor", "inherit");
-                return c;
-            }
-            d.data("$simpletooltip", e);
-        }
-        if (b.find("#" + e.attr("id")).length) {
-            console.log("exist", e.attr("id"));
-            return c;
-        }
-        b.append(e);
-        e.hide();
-        n(d);
-        if (j(d, "fade")) {
-            e.delay(180).fadeIn(200);
-        } else {
-            e.show();
-        }
-        return c;
-    }
-    function m(c) {
-        var d = a(c.currentTarget), e;
-        if (!(e = d.data("$simpletooltip"))) {
-            return c;
-        }
-        if (!b.find("#" + e.attr("id").length)) {
-            return c;
-        }
-        if (!e.css("opacity")) {
-            e.remove();
-            return c;
-        }
-        if (j(d, "fade")) {
-            e.clearQueue().stop().fadeOut(100, function() {
-                e.remove();
-            });
-        } else {
-            e.remove();
-        }
-        return c;
-    }
-    function n(b) {
-        if (!b.data("$simpletooltip")) {
+    }, f;
+    b = function(a) {
+        this.$el = a || null;
+        this.$tooltip = null;
+        this.$arrow = null;
+        this.margins = {
+            border: 6,
+            top: 15,
+            right: 15,
+            bottom: 15,
+            left: 15
+        };
+        this.templates = {
+            tooltip: '<div class="simple-tooltip"></div>',
+            arrow: '<span class="arrow">&nbsp;</span>'
+        };
+        if (!this.isJqueryObject(this.$el)) {
             return;
         }
-        var c = b.data("$simpletooltip"), d = b.offset(), g = c.$arrow ? c.$arrow : c.find(" > .arrow"), h = j(b, "background_color"), i = j(b, "border_color");
-        var k = j(b, "border_width");
-        k = !i || typeof k === "boolean" || k === "none" ? 0 : Number(k);
-        var l = !k || !i ? h : i;
-        var m = Math.round(e.arrow_width * 3 / 4), n = -parseInt(e.arrow_width * 2 + k, 10), o = -parseInt(m * 2 + k, 10);
-        console.log("color", l);
-        var p = {
-            maxWidth: j(b, "max_width"),
-            backgroundColor: h,
-            color: j(b, "color"),
-            borderColor: i,
-            borderWidth: k
+        this.title = this.$el.attr("title");
+        if (this.title === undefined || !this.title.length) {
+            return;
+        }
+        this.$el.attr("title", "");
+        this.setTooltip();
+        this.initialize();
+        return this;
+    };
+    b.prototype.isJqueryObject = function(a) {
+        return a !== null && a !== undefined && typeof a === "object" && a.jquery !== undefined ? true : false;
+    };
+    b.prototype.setTooltip = function() {
+        if (this.isJqueryObject(this.$tooltip) && this.isJqueryObject(this.$arrow)) {
+            return;
+        }
+        this.$tooltip = a(this.templates.tooltip);
+        this.$tooltip.html(this.title);
+        this.$tooltip.addClass(this.getAttribute("position"));
+        this.$arrow = a(this.templates.arrow);
+        this.$tooltip.append(this.$arrow);
+        return this.$tooltip;
+    };
+    b.prototype.getAttribute = function(a) {
+        var b = "simpletooltip-" + a.replace("_", "-"), c;
+        if (this.$el.data(b) !== undefined) {
+            return this.$el.data(b);
+        }
+        if ((c = this.$el.data("simpletooltip-theme")) !== undefined) {
+            if (d[c] !== undefined && d[c][a] !== undefined) {
+                return d[c][a];
+            }
+        }
+        if (f[a] !== undefined) {
+            return f[a];
+        }
+        return false;
+    };
+    b.prototype.initialize = function() {
+        this.$el.on("mouseenter", {
+            that: this
+        }, this.mouseOver);
+        this.$el.on("mouseleave", {
+            that: this
+        }, this.mouseOut);
+        this.$el.attr("title", "");
+    };
+    b.prototype.mouseOver = function(a) {
+        var b = a.data.that;
+        if (b.$tooltip.parent().length) {
+            return a;
+        }
+        c.append(b.$tooltip);
+        b.$tooltip.hide();
+        b.styleTooltip();
+        if (b.getAttribute("fade")) {
+            b.$tooltip.delay(180).fadeIn(200);
+        } else {
+            b.$tooltip.show();
+        }
+        return a;
+    };
+    b.prototype.mouseOut = function(a) {
+        var b = a.data.that;
+        if (!b.$tooltip.parent().length) {
+            return a;
+        }
+        if (!b.$tooltip.css("opacity")) {
+            b.$tooltip.remove();
+            return a;
+        }
+        if (b.getAttribute("fade")) {
+            b.$tooltip.clearQueue().stop().fadeOut(100, function() {
+                b.$tooltip.remove();
+            });
+        } else {
+            b.$tooltip.remove();
+        }
+        return a;
+    };
+    b.prototype.styleTooltip = function() {
+        if (!this.isJqueryObject(this.$el) || !this.isJqueryObject(this.$tooltip)) {
+            return;
+        }
+        var b = this.$el.offset(), c = this.getAttribute("background_color"), d = this.getAttribute("border_color");
+        if (!this.isJqueryObject(this.$arrow)) {
+            this.$arrow = this.$tooltip.find(" > .arrow");
+        }
+        var e = this.getAttribute("border_width");
+        e = !d || typeof e === "boolean" || e === "none" ? 0 : Number(e);
+        var g = !e || !d ? c : d;
+        var h = Math.round(f.arrow_width * 3 / 4), i = -parseInt(f.arrow_width * 2 + e, 10), j = -parseInt(h * 2 + e, 10);
+        var k = {
+            maxWidth: this.getAttribute("max_width"),
+            backgroundColor: c,
+            color: this.getAttribute("color"),
+            borderColor: d,
+            borderWidth: e
         };
-        switch (j(b, "position")) {
+        switch (this.getAttribute("position")) {
           case "top-right":
-            d.top -= parseInt(c.outerHeight() + f.bottom, 10);
-            d.left += parseInt(b.outerWidth() - f.right - f.border, 10);
-            g.css({
-                left: e.padding.width - k,
-                borderWidth: m,
-                bottom: o,
-                borderTopColor: l,
-                borderLeftColor: l
+            b.top -= parseInt(this.$tooltip.outerHeight() + this.margins.bottom, 10);
+            b.left += parseInt(this.$el.outerWidth() - this.margins.right - this.margins.border, 10);
+            this.$arrow.css({
+                left: f.padding.width - e,
+                borderWidth: h,
+                bottom: j,
+                borderTopColor: g,
+                borderLeftColor: g
             });
             break;
 
           case "right-top":
-            d.top -= parseInt(c.outerHeight() - f.bottom, 10);
-            d.left += parseInt(b.outerWidth() + f.right, 10);
-            g.css({
-                bottom: e.padding.height - k,
-                borderWidth: m,
-                left: o,
-                borderRightColor: l,
-                borderBottomColor: l
+            b.top -= parseInt(this.$tooltip.outerHeight() - this.margins.bottom, 10);
+            b.left += parseInt(this.$el.outerWidth() + this.margins.right, 10);
+            this.$arrow.css({
+                bottom: f.padding.height - e,
+                borderWidth: h,
+                left: j,
+                borderRightColor: g,
+                borderBottomColor: g
             });
             break;
 
           case "right":
-            d.top += parseInt((b.outerHeight() - c.outerHeight()) / 2, 10);
-            d.left += parseInt(b.outerWidth() + f.right, 10);
-            g.css({
-                left: n,
-                borderRightColor: l,
-                marginTop: -e.arrow_width
+            b.top += parseInt((this.$el.outerHeight() - this.$tooltip.outerHeight()) / 2, 10);
+            b.left += parseInt(this.$el.outerWidth() + this.margins.right, 10);
+            this.$arrow.css({
+                left: i,
+                borderRightColor: g,
+                marginTop: -f.arrow_width
             });
             break;
 
           case "right-bottom":
-            d.top += parseInt(b.outerHeight() - f.bottom, 10);
-            d.left += parseInt(b.outerWidth() + f.right, 10);
-            g.css({
-                top: e.padding.height - k,
-                borderWidth: m,
-                left: o,
-                borderRightColor: l,
-                borderTopColor: l
+            b.top += parseInt(this.$el.outerHeight() - this.margins.bottom, 10);
+            b.left += parseInt(this.$el.outerWidth() + this.margins.right, 10);
+            this.$arrow.css({
+                top: f.padding.height - e,
+                borderWidth: h,
+                left: j,
+                borderRightColor: g,
+                borderTopColor: g
             });
             break;
 
           case "bottom-right":
-            d.top += parseInt(b.outerHeight() + f.bottom, 10);
-            d.left += parseInt(b.outerWidth() - f.right - f.border, 10);
-            g.css({
-                left: e.padding.width - k,
-                borderWidth: m,
-                top: o,
-                borderBottomColor: l,
-                borderLeftColor: l
+            b.top += parseInt(this.$el.outerHeight() + this.margins.bottom, 10);
+            b.left += parseInt(this.$el.outerWidth() - this.margins.right - this.margins.border, 10);
+            this.$arrow.css({
+                left: f.padding.width - e,
+                borderWidth: h,
+                top: j,
+                borderBottomColor: g,
+                borderLeftColor: g
             });
             break;
 
           case "bottom":
-            d.top += parseInt(b.outerHeight() + f.bottom, 10);
-            d.left += parseInt((b.outerWidth() - c.outerWidth()) / 2, 10);
-            g.css({
-                top: n,
-                marginLeft: -e.arrow_width,
-                borderBottomColor: l
+            b.top += parseInt(this.$el.outerHeight() + this.margins.bottom, 10);
+            b.left += parseInt((this.$el.outerWidth() - this.$tooltip.outerWidth()) / 2, 10);
+            this.$arrow.css({
+                top: i,
+                marginLeft: -f.arrow_width,
+                borderBottomColor: g
             });
             break;
 
           case "bottom-left":
-            d.top += parseInt(b.outerHeight() + f.bottom, 10);
-            d.left -= parseInt(c.outerWidth() - f.left - f.border, 10);
-            g.css({
-                right: e.padding.width - k,
-                borderWidth: m,
-                top: o,
-                borderBottomColor: l,
-                borderRightColor: l
+            b.top += parseInt(this.$el.outerHeight() + this.margins.bottom, 10);
+            b.left -= parseInt(this.$tooltip.outerWidth() - this.margins.left - this.margins.border, 10);
+            this.$arrow.css({
+                right: f.padding.width - e,
+                borderWidth: h,
+                top: j,
+                borderBottomColor: g,
+                borderRightColor: g
             });
             break;
 
           case "left-bottom":
-            d.top += parseInt(b.outerHeight() - f.bottom, 10);
-            d.left -= parseInt(c.outerWidth() + f.left, 10);
-            g.css({
-                top: e.padding.height - k,
-                borderWidth: m,
-                right: o,
-                borderLeftColor: l,
-                borderTopColor: l
+            b.top += parseInt(this.$el.outerHeight() - this.margins.bottom, 10);
+            b.left -= parseInt(this.$tooltip.outerWidth() + this.margins.left, 10);
+            this.$arrow.css({
+                top: f.padding.height - e,
+                borderWidth: h,
+                right: j,
+                borderLeftColor: g,
+                borderTopColor: g
             });
             break;
 
           case "left":
-            d.top += parseInt((b.outerHeight() - c.outerHeight()) / 2, 10);
-            d.left -= parseInt(c.outerWidth() + f.left, 10);
-            g.css({
-                right: n,
-                borderLeftColor: l,
-                marginTop: -e.arrow_width
+            b.top += parseInt((this.$el.outerHeight() - this.$tooltip.outerHeight()) / 2, 10);
+            b.left -= parseInt(this.$tooltip.outerWidth() + this.margins.left, 10);
+            this.$arrow.css({
+                right: i,
+                borderLeftColor: g,
+                marginTop: -f.arrow_width
             });
             break;
 
           case "left-top":
-            d.top -= parseInt(c.outerHeight() - f.bottom, 10);
-            d.left -= parseInt(c.outerWidth() + f.left, 10);
-            g.css({
-                bottom: e.padding.height - k,
-                borderWidth: m,
-                right: o,
-                borderLeftColor: l,
-                borderBottomColor: l
+            b.top -= parseInt(this.$tooltip.outerHeight() - this.margins.bottom, 10);
+            b.left -= parseInt(this.$tooltip.outerWidth() + this.margins.left, 10);
+            this.$arrow.css({
+                bottom: f.padding.height - e,
+                borderWidth: h,
+                right: j,
+                borderLeftColor: g,
+                borderBottomColor: g
             });
             break;
 
           case "top-left":
-            d.top -= parseInt(c.outerHeight() + f.bottom, 10);
-            d.left -= parseInt(c.outerWidth() - f.left, 10);
-            g.css({
-                right: e.padding.width - k,
-                borderWidth: m,
-                bottom: o,
-                borderTopColor: l,
-                borderRightColor: l
+            b.top -= parseInt(this.$tooltip.outerHeight() + this.margins.bottom, 10);
+            b.left -= parseInt(this.$tooltip.outerWidth() - this.margins.left, 10);
+            this.$arrow.css({
+                right: f.padding.width - e,
+                borderWidth: h,
+                bottom: j,
+                borderTopColor: g,
+                borderRightColor: g
             });
             break;
 
           default:
-            d.top -= parseInt(c.outerHeight() + f.top, 10);
-            d.left += parseInt((b.outerWidth() - c.outerWidth()) / 2, 10);
-            g.css({
-                bottom: n,
-                borderTopColor: l,
-                marginLeft: -e.arrow_width
+            b.top -= parseInt(this.$tooltip.outerHeight() + this.margins.top, 10);
+            b.left += parseInt((this.$el.outerWidth() - this.$tooltip.outerWidth()) / 2, 10);
+            this.$arrow.css({
+                bottom: i,
+                borderTopColor: g,
+                marginLeft: -f.arrow_width
             });
         }
-        p = a.extend(p, {
-            top: d.top,
-            left: d.left
-        });
-        c.css(p);
-    }
-    function o(f) {
-        b = a("body");
-        e = a.extend(d, f);
-        if (e["themes"] !== undefined && typeof e.themes === "object") {
-            c = a.extend(c, e.themes);
-            delete e.themes;
+        this.$tooltip.css(a.extend(k, {
+            top: b.top,
+            left: b.left
+        }));
+    };
+    function g(b) {
+        c = a("body");
+        if (b === undefined || typeof b !== "object") {
+            return;
         }
-        if (c[e.theme] !== undefined) {
-            e = a.extend(e, c[e.theme]);
+        f = a.extend(e, b);
+        if (f["themes"] !== undefined && typeof f.themes === "object") {
+            d = a.extend(d, f.themes);
+            delete f.themes;
+        }
+        if (d[f.theme] !== undefined) {
+            f = a.extend(f, d[f.theme]);
         }
     }
-    function p() {
-        a(".simpletooltip").each(function(b) {
-            var c = a(this);
-            c.on("mouseenter", {
-                title: c.attr("title")
-            }, l);
-            c.on("mouseleave", {
-                title: c.attr("title")
-            }, m);
-            c.attr("title", "");
+    a.simpletooltip = function(c) {
+        g(c);
+        a(".simpletooltip").each(function() {
+            new b(a(this));
+            return this;
         });
-    }
-    a.simpletooltip = function(a) {
-        o(a);
-        p();
+    };
+    a.fn.simpletooltip = function(c) {
+        g(c);
+        new b(a(this));
+        return this;
     };
 })(jQuery);

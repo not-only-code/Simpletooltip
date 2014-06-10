@@ -11,7 +11,8 @@
 (function($) {
 	"use strict";
 
-	var $body = null,
+	var Simpletooltip,
+		$body = null,
 		themes = {
 			dark: {
 				color: '#CCCCCC',
@@ -40,7 +41,6 @@
 		},
 		defaults = {
 			position: 'top',
-			theme: 'dark',
 			color: '#DDDDDD',
 			background_color: '#222222',
 			border_width: 0,
@@ -52,30 +52,71 @@
 			max_width: 200,
 			fade: true
 		},
-		settings,
-		margins = {
+		settings;
+
+	Simpletooltip = function ($el) {
+
+		this.$el = $el || null;
+		this.$tooltip = null;
+		this.$arrow = null;
+		this.margins = {
 			border: 6,
 			top: 15,
 			right: 15,
 			bottom: 15,
 			left: 15
-		},
-		index = 0,
-		tooltip_template = '<div id="simple-tooltip-%index" class="simple-tooltip %position">%title</div>',
-		arrow_template = '<span class="arrow">&nbsp;</span>';
-	//
-	//--------- --
-	//
-	function getAttribute ($element, attribute_name) {
+		};
+		this.templates = {
+			tooltip: '<div class="simple-tooltip"></div>',
+			arrow: '<span class="arrow">&nbsp;</span>'
+		};
+
+		if (!this.isJqueryObject(this.$el)) {
+			return;
+		}
+
+		this.title = this.$el.attr('title');
+		if (this.title === undefined || !this.title.length) {
+			return;
+		}
+		this.$el.attr('title', '');
+
+		this.setTooltip();
+		this.initialize();
+
+		return this;
+	};
+
+	Simpletooltip.prototype.isJqueryObject = function (what) {
+		return ( what !== null && what !== undefined && typeof(what) === 'object' && what.jquery !== undefined ) ? true : false;
+	};
+
+	Simpletooltip.prototype.setTooltip = function () {
+
+		if (this.isJqueryObject(this.$tooltip) && this.isJqueryObject(this.$arrow)) {
+			return;
+		}
+
+		this.$tooltip = $(this.templates.tooltip);
+		//this.$tooltip.attr('id', 'simple-tooltip-' + Math.random(1000000, 1));
+		this.$tooltip.html(this.title);
+		this.$tooltip.addClass(this.getAttribute('position'));
+		this.$arrow = $(this.templates.arrow);
+		this.$tooltip.append(this.$arrow);
+
+		return this.$tooltip;
+	};
+
+	Simpletooltip.prototype.getAttribute = function (attribute_name) {
 
 		var attribute = 'simpletooltip-' + attribute_name.replace('_', '-'),
 			theme;
 
-		if ($element.data(attribute) !== undefined) {
-			return $element.data(attribute);
+		if (this.$el.data(attribute) !== undefined) {
+			return this.$el.data(attribute);
 		}
 
-		if ( (theme = $element.data('simpletooltip-theme')) !== undefined ) {
+		if ( (theme = this.$el.data('simpletooltip-theme')) !== undefined ) {
 			if (themes[theme] !== undefined && themes[theme][attribute_name] !== undefined) {
 				return themes[theme][attribute_name];
 			}
@@ -86,109 +127,79 @@
 		}
 
 		return false;
-	}
-	//--------- --
-	//
-	function buildTooltip (event) {
-		var tag, $tag, $arrow;
+	};
 
-		if (event.data.title !== undefined && event.data.title.length) {
-			tag = tooltip_template.replace('%index', index);
-			index++;
-			tag = tag.replace('%title', event.data.title);
-			tag = tag.replace('%position', getAttribute($(event.currentTarget), 'position'));
+	Simpletooltip.prototype.initialize = function() {
 
-			$tag = $(tag);
-			$arrow = $(arrow_template);
+		this.$el.on('mouseenter', {that: this}, this.mouseOver);
+		this.$el.on('mouseleave', {that: this}, this.mouseOut);
 
-			$tag.append($arrow);
+		this.$el.attr('title', '');
+	};
 
-			$tag.$arrow = $arrow;
+	Simpletooltip.prototype.mouseOver = function (event) {
 
-			return $tag;
-		}
-		return false;
-	}
-	//--------- --
-	//
-	function mouseOver (event) {
+		var that = event.data.that; // DIRTY
 
-		var $element = $(event.currentTarget), $tooltip;
-
-		if ( !($tooltip = $element.data('$simpletooltip')) ) {
-			$tooltip = buildTooltip(event);
-
-			if (!$tooltip) {
-				$element.css('cursor', 'inherit');
-				return event;
-			}
-
-			$element.data('$simpletooltip', $tooltip);
-		}
-
-		// change this for something like $body.has()
-		if ($body.find('#' + $tooltip.attr('id')).length) {
-			console.log('exist', $tooltip.attr('id'));
+		if (that.$tooltip.parent().length) {
 			return event;
 		}
 
-		$body.append($tooltip);
+		$body.append(that.$tooltip);
 
-		$tooltip.hide();
+		that.$tooltip.hide();
 
-		styleTooltip($element);
+		that.styleTooltip();
 
-		if (getAttribute($element, 'fade')) {
-			$tooltip.delay(180).fadeIn(200);
+		if (that.getAttribute('fade')) {
+			that.$tooltip.delay(180).fadeIn(200);
 		} else {
-			$tooltip.show();
+			that.$tooltip.show();
 		}
 
 		return event;
-	}
-	//--------- --
-	//
-	function mouseOut (event) {
+	};
 
-		var $element = $(event.currentTarget), $tooltip;
-		
-		if ( !($tooltip = $element.data('$simpletooltip')) ) {
+	Simpletooltip.prototype.mouseOut = function (event) {
+
+		var that = event.data.that; // DIRTY
+
+		if (!that.$tooltip.parent().length) {
 			return event;
 		}
 
-		if (!$body.find('#' + $tooltip.attr('id').length)) {
+		// TEAK THIS
+		if (!that.$tooltip.css('opacity')) {
+			that.$tooltip.remove();
 			return event;
 		}
 
-		if (!$tooltip.css('opacity')) {
-			$tooltip.remove();
-			return event;
-		}
-		if (getAttribute($element, 'fade')) {
-			$tooltip.clearQueue().stop().fadeOut(100, function() {
-				$tooltip.remove();
+		if (that.getAttribute('fade')) {
+			that.$tooltip.clearQueue().stop().fadeOut(100, function() {
+				that.$tooltip.remove();
 			});
 		} else {
-			$tooltip.remove();
+			that.$tooltip.remove();
 		}
 
 		return event;
-	}
-	//--------- --
-	//
-	function styleTooltip ($element) {
+	};
 
-		if (!$element.data('$simpletooltip')) {
+	Simpletooltip.prototype.styleTooltip = function () {
+
+		if (!this.isJqueryObject(this.$el) || !this.isJqueryObject(this.$tooltip) ) {
 			return;
 		}
 
-		var $tooltip = $element.data('$simpletooltip'),
-			pos = $element.offset(),
-			$arrow = ($tooltip.$arrow) ? $tooltip.$arrow : $tooltip.find(' > .arrow'),
-			background_color = getAttribute($element, 'background_color'),
-			border_color = getAttribute($element, 'border_color');
+		var pos = this.$el.offset(),
+			background_color = this.getAttribute('background_color'),
+			border_color = this.getAttribute('border_color');
+
+		if (!this.isJqueryObject(this.$arrow)) {
+			this.$arrow = this.$tooltip.find(' > .arrow');
+		}
 		
-		var border_width = getAttribute($element, 'border_width');
+		var border_width = this.getAttribute('border_width');
 
 		border_width = (!border_color || typeof(border_width) === 'boolean' || border_width === 'none') ? 0 : Number(border_width);
 		
@@ -197,22 +208,20 @@
 		var arrow_side_width = Math.round((settings.arrow_width * 3) / 4),
 			arrow_position = -parseInt( ((settings.arrow_width * 2) + border_width), 10 ),
 			arrow_side_position = -parseInt( ((arrow_side_width * 2) + border_width), 10 );
-
-		console.log('color', arrow_color);
 		
 		var tooltip_attributes = {
-			maxWidth: getAttribute($element, 'max_width'),
+			maxWidth: this.getAttribute('max_width'),
 			backgroundColor: background_color,
-			color: getAttribute($element, 'color'),
+			color: this.getAttribute('color'),
 			borderColor: border_color,
 			borderWidth: border_width
 		};
 		
-		switch (getAttribute($element, 'position')) {
+		switch (this.getAttribute('position')) {
 			case 'top-right':
-				pos.top -= parseInt( ($tooltip.outerHeight() + margins.bottom), 10 );
-				pos.left += parseInt( ($element.outerWidth() - margins.right - margins.border), 10 );
-				$arrow.css({
+				pos.top -= parseInt( (this.$tooltip.outerHeight() + this.margins.bottom), 10 );
+				pos.left += parseInt( (this.$el.outerWidth() - this.margins.right - this.margins.border), 10 );
+				this.$arrow.css({
 					left: settings.padding.width - border_width,
 					borderWidth: arrow_side_width,
 					bottom: arrow_side_position,
@@ -221,9 +230,9 @@
 				});
 				break;
 			case 'right-top':
-				pos.top -= parseInt( ($tooltip.outerHeight() - margins.bottom), 10 );
-				pos.left += parseInt( ($element.outerWidth() + margins.right), 10 );
-				$arrow.css({
+				pos.top -= parseInt( (this.$tooltip.outerHeight() - this.margins.bottom), 10 );
+				pos.left += parseInt( (this.$el.outerWidth() + this.margins.right), 10 );
+				this.$arrow.css({
 					bottom: settings.padding.height - border_width,
 					borderWidth: arrow_side_width,
 					left: arrow_side_position,
@@ -232,18 +241,18 @@
 				});
 				break;
 			case 'right':
-				pos.top += parseInt( (($element.outerHeight() - $tooltip.outerHeight())/2), 10 );
-				pos.left += parseInt( ($element.outerWidth() + margins.right), 10 );
-				$arrow.css({
+				pos.top += parseInt( ((this.$el.outerHeight() - this.$tooltip.outerHeight())/2), 10 );
+				pos.left += parseInt( (this.$el.outerWidth() + this.margins.right), 10 );
+				this.$arrow.css({
 					left: arrow_position,
 					borderRightColor: arrow_color,
 					marginTop: - settings.arrow_width
 				});
 				break;
 			case 'right-bottom':
-				pos.top += parseInt( ($element.outerHeight() - margins.bottom), 10 );
-				pos.left += parseInt( ($element.outerWidth() + margins.right), 10 );
-				$arrow.css({
+				pos.top += parseInt( (this.$el.outerHeight() - this.margins.bottom), 10 );
+				pos.left += parseInt( (this.$el.outerWidth() + this.margins.right), 10 );
+				this.$arrow.css({
 					top: settings.padding.height - border_width,
 					borderWidth: arrow_side_width,
 					left: arrow_side_position,
@@ -252,9 +261,9 @@
 				});
 				break;
 			case 'bottom-right':
-				pos.top += parseInt( ($element.outerHeight() + margins.bottom), 10 );
-				pos.left += parseInt( ($element.outerWidth() - margins.right - margins.border), 10 );
-				$arrow.css({
+				pos.top += parseInt( (this.$el.outerHeight() + this.margins.bottom), 10 );
+				pos.left += parseInt( (this.$el.outerWidth() - this.margins.right - this.margins.border), 10 );
+				this.$arrow.css({
 					left: settings.padding.width - border_width,
 					borderWidth: arrow_side_width,
 					top: arrow_side_position,
@@ -263,18 +272,18 @@
 				});
 				break;
 			case 'bottom':
-				pos.top += parseInt( ($element.outerHeight() + margins.bottom), 10 );
-				pos.left += parseInt( (($element.outerWidth()-$tooltip.outerWidth())/2), 10 );
-				$arrow.css({
+				pos.top += parseInt( (this.$el.outerHeight() + this.margins.bottom), 10 );
+				pos.left += parseInt( ((this.$el.outerWidth()-this.$tooltip.outerWidth())/2), 10 );
+				this.$arrow.css({
 					top: arrow_position,
 					marginLeft: - settings.arrow_width,
 					borderBottomColor: arrow_color
 				});
 				break;
 			case 'bottom-left':
-				pos.top += parseInt( ($element.outerHeight() + margins.bottom), 10 );
-				pos.left -= parseInt( ($tooltip.outerWidth() - margins.left - margins.border), 10 );
-				$arrow.css({
+				pos.top += parseInt( (this.$el.outerHeight() + this.margins.bottom), 10 );
+				pos.left -= parseInt( (this.$tooltip.outerWidth() - this.margins.left - this.margins.border), 10 );
+				this.$arrow.css({
 					right: settings.padding.width - border_width,
 					borderWidth: arrow_side_width,
 					top: arrow_side_position,
@@ -283,9 +292,9 @@
 				});
 				break;
 			case 'left-bottom':
-				pos.top += parseInt( ($element.outerHeight() - margins.bottom), 10 );
-				pos.left -= parseInt( ($tooltip.outerWidth() + margins.left), 10 );
-				$arrow.css({
+				pos.top += parseInt( (this.$el.outerHeight() - this.margins.bottom), 10 );
+				pos.left -= parseInt( (this.$tooltip.outerWidth() + this.margins.left), 10 );
+				this.$arrow.css({
 					top: settings.padding.height - border_width,
 					borderWidth: arrow_side_width,
 					right: arrow_side_position,
@@ -294,18 +303,18 @@
 				});
 				break;
 			case 'left':
-				pos.top += parseInt(  (($element.outerHeight() - $tooltip.outerHeight())/2), 10 ) ;
-				pos.left -= parseInt(  ($tooltip.outerWidth() + margins.left), 10 );
-				$arrow.css({
+				pos.top += parseInt(  ((this.$el.outerHeight() - this.$tooltip.outerHeight())/2), 10 ) ;
+				pos.left -= parseInt(  (this.$tooltip.outerWidth() + this.margins.left), 10 );
+				this.$arrow.css({
 					right: arrow_position,
 					borderLeftColor: arrow_color,
 					marginTop: -settings.arrow_width
 				});
 				break;
 			case 'left-top':
-				pos.top -= parseInt( ($tooltip.outerHeight() - margins.bottom), 10 );
-				pos.left -= parseInt( ($tooltip.outerWidth() + margins.left), 10 );
-				$arrow.css({
+				pos.top -= parseInt( (this.$tooltip.outerHeight() - this.margins.bottom), 10 );
+				pos.left -= parseInt( (this.$tooltip.outerWidth() + this.margins.left), 10 );
+				this.$arrow.css({
 					bottom: settings.padding.height - border_width,
 					borderWidth: arrow_side_width,
 					right: arrow_side_position,
@@ -314,9 +323,9 @@
 				});
 				break;
 			case 'top-left':
-				pos.top -= parseInt( ($tooltip.outerHeight() + margins.bottom), 10 );
-				pos.left -= parseInt( ($tooltip.outerWidth() - margins.left), 10 );
-				$arrow.css({
+				pos.top -= parseInt( (this.$tooltip.outerHeight() + this.margins.bottom), 10 );
+				pos.left -= parseInt( (this.$tooltip.outerWidth() - this.margins.left), 10 );
+				this.$arrow.css({
 					right: settings.padding.width - border_width,
 					borderWidth: arrow_side_width,
 					bottom: arrow_side_position,
@@ -326,27 +335,30 @@
 				break;
 			// top case
 			default:
-				pos.top -= parseInt( ($tooltip.outerHeight() + margins.top), 10 );
-				pos.left += parseInt( (($element.outerWidth()-$tooltip.outerWidth())/2), 10 );
-				$arrow.css({
+				pos.top -= parseInt( (this.$tooltip.outerHeight() + this.margins.top), 10 );
+				pos.left += parseInt( ((this.$el.outerWidth()-this.$tooltip.outerWidth())/2), 10 );
+				this.$arrow.css({
 					bottom: arrow_position,
 					borderTopColor: arrow_color,
 					marginLeft: - settings.arrow_width
 				});
 		}
-		
-		tooltip_attributes = $.extend(tooltip_attributes, {
+
+		this.$tooltip.css($.extend(tooltip_attributes, {
 			top: pos.top,
 			left: pos.left
-		});
-
-		$tooltip.css(tooltip_attributes);
-	}
+		}));
+	};
+	//
 	//--------- --
 	//
 	function setSettings (_settings) {
 
 		$body = $('body');
+
+		if (_settings === undefined || typeof(_settings) !== 'object') {
+			return;
+		}
 
 		settings = $.extend(defaults, _settings);
 
@@ -359,23 +371,22 @@
 			settings = $.extend(settings, themes[settings.theme]);
 		}
 	}
-	//--------- --
-	//
-	function addActions () {
-		$('.simpletooltip').each(function(index) {
-			var $this = $(this);
-
-			$this.on('mouseenter', {title: $this.attr('title')}, mouseOver);
-			$this.on('mouseleave', {title: $this.attr('title')}, mouseOut);
-
-			$this.attr('title', '');
-		});
-	}
 	//
 	//--------- --
 	//
-	$.simpletooltip = function(_settings) {
+	$.simpletooltip = function (_settings) {
 		setSettings(_settings);
-		addActions();
+		$('.simpletooltip').each(function() {
+			new Simpletooltip($(this));
+			return this;
+		});
 	};
+	//
+	$.fn.simpletooltip = function (_settings) {
+		setSettings(_settings);
+		new Simpletooltip($(this));
+
+		return this;
+	};
+
 })(jQuery);
