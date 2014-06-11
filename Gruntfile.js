@@ -31,6 +31,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'dist/css/simpletooltip.min.css': 'src/css/simpletooltip.less',
+                    'demo/css/simpletooltip.min.css': 'src/css/simpletooltip.less',
                     'demo/css/demo.min.css': 'demo/css/demo.less'
                 }
             }
@@ -57,6 +58,7 @@ module.exports = function (grunt) {
             min: {
                 files: {
                     'dist/js/simpletooltip.min.js': ['src/js/simpletooltip.js'],
+                    'demo/js/simpletooltip.min.js': ['src/js/simpletooltip.js'],
                     'demo/js/scrollspy.min.js': ['bower_components/bootstrap/js/scrollspy.js'],
                     'demo/js/affix.min.js': ['bower_components/bootstrap/js/affix.js']
                 }
