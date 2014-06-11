@@ -54,7 +54,7 @@
 		},
 		settings;
 
-	Simpletooltip = function ($el) {
+	Simpletooltip = function($el) {
 
 		this.$el = $el || null;
 		this.$tooltip = null;
@@ -71,7 +71,7 @@
 			arrow: '<span class="arrow">&nbsp;</span>'
 		};
 
-		if (!this.isJqueryObject(this.$el)) {
+		if (!isJqueryObject(this.$el) || this.$el.data().hasOwnProperty('simpletooltipInstanced')) {
 			return;
 		}
 
@@ -84,27 +84,32 @@
 		this.setTooltip();
 		this.initialize();
 
-		return this;
-	};
+		this.$el.data('simpletooltip-instanced', '1');
 
-	Simpletooltip.prototype.isJqueryObject = function (what) {
-		return ( what !== null && what !== undefined && typeof(what) === 'object' && what.jquery !== undefined ) ? true : false;
+		return this;
 	};
 
 	Simpletooltip.prototype.setTooltip = function () {
 
-		if (this.isJqueryObject(this.$tooltip) && this.isJqueryObject(this.$arrow)) {
+		if (isJqueryObject(this.$tooltip) && isJqueryObject(this.$arrow)) {
 			return;
 		}
 
 		this.$tooltip = $(this.templates.tooltip);
-		//this.$tooltip.attr('id', 'simple-tooltip-' + Math.random(1000000, 1));
 		this.$tooltip.html(this.title);
 		this.$tooltip.addClass(this.getAttribute('position'));
 		this.$arrow = $(this.templates.arrow);
 		this.$tooltip.append(this.$arrow);
 
 		return this.$tooltip;
+	};
+
+	Simpletooltip.prototype.initialize = function() {
+
+		this.$el.on('mouseenter', {that: this}, this.mouseOver);
+		this.$el.on('mouseleave', {that: this}, this.mouseOut);
+
+		this.$el.attr('title', '');
 	};
 
 	Simpletooltip.prototype.getAttribute = function (attribute_name) {
@@ -127,14 +132,6 @@
 		}
 
 		return false;
-	};
-
-	Simpletooltip.prototype.initialize = function() {
-
-		this.$el.on('mouseenter', {that: this}, this.mouseOver);
-		this.$el.on('mouseleave', {that: this}, this.mouseOut);
-
-		this.$el.attr('title', '');
 	};
 
 	Simpletooltip.prototype.mouseOver = function (event) {
@@ -187,7 +184,7 @@
 
 	Simpletooltip.prototype.styleTooltip = function () {
 
-		if (!this.isJqueryObject(this.$el) || !this.isJqueryObject(this.$tooltip) ) {
+		if (!isJqueryObject(this.$el) || !isJqueryObject(this.$tooltip) ) {
 			return;
 		}
 
@@ -195,7 +192,7 @@
 			background_color = this.getAttribute('background_color'),
 			border_color = this.getAttribute('border_color');
 
-		if (!this.isJqueryObject(this.$arrow)) {
+		if (!isJqueryObject(this.$arrow)) {
 			this.$arrow = this.$tooltip.find(' > .arrow');
 		}
 		
@@ -352,6 +349,12 @@
 	//
 	//--------- --
 	//
+	function isJqueryObject (what) {
+		return ( what !== null && what !== undefined && typeof(what) === 'object' && what.jquery !== undefined ) ? true : false;
+	}
+	//
+	//--------- --
+	//
 	function setSettings (_settings) {
 
 		$body = $('body');
@@ -375,16 +378,26 @@
 	//--------- --
 	//
 	$.simpletooltip = function (_settings) {
+
 		setSettings(_settings);
+		
 		$('.simpletooltip').each(function() {
-			new Simpletooltip($(this));
+
+			if (!$(this).data().hasOwnProperty('simpletooltipInstanced')) {
+				new Simpletooltip($(this));
+			}
+			
 			return this;
 		});
 	};
 	//
 	$.fn.simpletooltip = function (_settings) {
+
 		setSettings(_settings);
-		new Simpletooltip($(this));
+
+		if (!$(this).data().hasOwnProperty('simpletooltipInstanced')) {
+			new Simpletooltip($(this));
+		}
 
 		return this;
 	};
