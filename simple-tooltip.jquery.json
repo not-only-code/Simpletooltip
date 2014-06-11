@@ -2,20 +2,13 @@
   "name": "simple-tooltip",
   "title": "Simpletooltip",
   "description": "Simpletooltip is a JQuery plugin, thought to insert short tooltips to any element of your website more easily",
-  "keywords": ["tooltip"],
-  "version": "1.3.0",
+  "keywords": ["jquery", "plugin", "title", "simple", "tooltip", "simpletoltip"],
+  "version": "1.3.1",
   "author": {
     "name": "Carlos Sanz Garcia",
     "email": "carlos.sanz@gmail.com",
     "url": "http://codingsomething.wordpress.com"
   },
-  "maintainers": [
-    {
-      "name": "Carlos Sanz Garcia",
-      "email": "carlos.sanz@gmail.com",
-      "url": "http://codingsomething.wordpress.com/"
-    }
-  ],
   "licenses": [
     {
       "type": "GPL-3.0",
@@ -23,7 +16,9 @@
     }
   ],
   "homepage": "http://not-only-code.github.io/Simpletooltip",
+  "bugs": "https://github.com/not-only-code/Simpletooltip/issues",
   "docs": "https://github.com/not-only-code/Simpletooltip",
+  "download": "https://github.com/not-only-code/Simpletooltip/archive/v1.3.1.zip",
   "dependencies": {
     "jquery": ">=1.8"
   }
