@@ -321,20 +321,18 @@
             f = a.extend(f, d[f.theme]);
         }
     }
-    a.simpletooltip = function(c) {
-        h(c);
-        a(".simpletooltip").each(function() {
-            if (!a(this).data().hasOwnProperty("simpletooltipInstanced")) {
-                new b(a(this));
-            }
-            return this;
-        });
-    };
     a.fn.simpletooltip = function(c) {
         h(c);
-        if (!a(this).data().hasOwnProperty("simpletooltipInstanced")) {
-            new b(a(this));
-        }
-        return this;
+        return this.each(function() {
+            var c = a(this);
+            if (!c.data().hasOwnProperty("simpletooltipInstanced")) {
+                new b(c);
+            }
+        });
     };
+    a(window).on("load", function() {
+        a('[data-simpletooltip="init"]').each(function() {
+            a(this).simpletooltip();
+        });
+    });
 })(jQuery);

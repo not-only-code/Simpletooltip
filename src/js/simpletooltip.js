@@ -53,7 +53,14 @@
 			fade: true
 		},
 		settings;
-
+	/*
+	 * Simpletooltip: main class definition
+	 * 
+	 * @param $el (object)
+	 * @this (Simpletooltip)
+	 *
+	 * @return (Simpletooltip)
+	**/
 	Simpletooltip = function($el) {
 
 		this.$el = $el || null;
@@ -355,7 +362,7 @@
 	//
 	//--------- --
 	//
-	function setSettings (_settings) {
+	function setOptions (_settings) {
 
 		$body = $('body');
 
@@ -374,32 +381,30 @@
 			settings = $.extend(settings, themes[settings.theme]);
 		}
 	}
-	//
-	//--------- --
-	//
-	$.simpletooltip = function (_settings) {
-
-		setSettings(_settings);
-		
-		$('.simpletooltip').each(function() {
-
-			if (!$(this).data().hasOwnProperty('simpletooltipInstanced')) {
-				new Simpletooltip($(this));
+	/*
+	 * jQuery function definition
+	 *
+	 * @return (Array)
+	**/
+	$.fn.simpletooltip = function(options) {
+		setOptions(options);
+		return this.each(function() {
+			var $this =  $(this);
+			if (!$this.data().hasOwnProperty('simpletooltipInstanced')) {
+				new Simpletooltip($this);
 			}
-			
-			return this;
 		});
 	};
-	//
-	$.fn.simpletooltip = function (_settings) {
+	/*
+	 * initialize automatically the plugin using data attributes
+	 *
+	 * @return (void)
+	**/
+	$(window).on('load', function () {
+		$('[data-simpletooltip="init"]').each(function() {
+			$(this).simpletooltip();
+		});
+	});
 
-		setSettings(_settings);
-
-		if (!$(this).data().hasOwnProperty('simpletooltipInstanced')) {
-			new Simpletooltip($(this));
-		}
-
-		return this;
-	};
 
 })(jQuery);
