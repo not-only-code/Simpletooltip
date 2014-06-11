@@ -51,12 +51,14 @@ module.exports = function (grunt) {
                     compress: false
                 },
                 files: {
-                    'dist/js/simpletooltip.js': ['src/js/simpletooltip.js']
+                    'dist/js/simpletooltip.js': ['src/js/simpletooltip.js'],
                 }
             },
             min: {
                 files: {
-                    'dist/js/simpletooltip.min.js': ['src/js/simpletooltip.js']
+                    'dist/js/simpletooltip.min.js': ['src/js/simpletooltip.js'],
+                    'demo/js/scrollspy.min.js': ['bower_components/bootstrap/js/scrollspy.js'],
+                    'demo/js/affix.min.js': ['bower_components/bootstrap/js/affix.js']
                 }
             }
         },
