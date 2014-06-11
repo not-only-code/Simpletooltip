@@ -1,6 +1,6 @@
 #Simpletoolip
 
-![Simpletooltip logo](https://codingsomething.files.wordpress.com/2012/06/simpletooltip-logo-cropped.png?w=200&h=200)
+![Simpletooltip logo](https://codingsomething.files.wordpress.com/2014/06/simpletooltip-logo.png?w=200&h=200)
 > _...is a Jquery plugin, thought to insert short tooltips to any element of your website more easily_
 
 ## Features
@@ -68,16 +68,16 @@ Simpletooltip is thought for use small and descriptive texts replacing the origi
 
 ## Parameters
 
-attribute          | description                                      | values                                                                                                                                               | default
--------------------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|----------
-`position`         | position of tooltip in relation with the element | `top`, `top-left`, `left-top`, `left`, `left-bottom`, `bottom-left`, `bottom`, `bottom-right`, `right-bottom`, `right`, `right-top`, `top-right`     | `top` 
-`color`            | color of text inside the box                     | hex `#FFFFFF`, rgba `'rgba(255, 255, 255, 0.5)'`, string `'white'`                                                                                   | `#CCCCCC`
-`background_color` | color of background of the box                   | hex `#000000`, rgba `'rgba(0, 0, 0, 0.5)'`, string `'black'`                                                                                         | `#222222`
-`border_color`     | color of the box border                          | hex `#000000`, rgba `'rgba(0, 0, 0, 0.5)'`, string `'black'`                                                                                         | `#111111`
-`border_width`     | width of box border (in pixels)                  | number `4`, string `4px`, without border `0`, `'none'`                                                                                               | `4px`     
-`arrow_width`      | size of the arrow (in pixels)                    | number `6`, string `6px`                                                                                                                             | `4px`     
-`fade`             | animation when appears                           | `true`, `false`                                                                                                                                      | `true`    
-`max_width`        | limit of the box width                           | number `200`, string `'200px'`                                                                                                                       | `200px`  
+attribute          | description                                      | values                                                                                                                                 | default
+-------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|----------
+`position`         | position of tooltip in relation with the element | `top` `top-left` `left-top` `left` `left-bottom` `bottom-left` `bottom` `bottom-right` `right-bottom` `right` `right-top` `top-right`  | `top` 
+`color`            | color of text inside the box                     | `#FFFFFF` / `'rgba(255, 255, 255, 0.5)'` / `'white'`                                                                                   | `#CCCCCC`
+`background_color` | color of background of the box                   | `#000000` / `'rgba(0, 0, 0, 0.5)'` / `'black'`                                                                                         | `#222222`
+`border_color`     | color of the box border                          | `#000000` / `'rgba(0, 0, 0, 0.5)'` / `'black'`                                                                                         | `#111111`
+`border_width`     | width of box border (in pixels)                  | `4` / `4px` / `0` `'none'`                                                                                                             | `0`     
+`arrow_width`      | size of the arrow (in pixels)                    | `6` / `6px`                                                                                                                            | `4px`     
+`fade`             | animation when appears                           | `true` / `false`                                                                                                                       | `true`    
+`max_width`        | limit of the box width                           | `200` / `'200px'`                                                                                                                      | `200px`  
 
 
 
@@ -108,15 +108,17 @@ You can download the plugin (zip format) [from here](https://github.com/not-only
 
 ## Changelog
 
-### v1.3.0 (15.06.2014)
+### v1.3.0 (13.06.2014)
 
-* added npm, grunt and bower in order to automatize and build all scripts
 * new: parameters. You can pass some parameters to adjust size, border, colors, animation, arrow size, etc.
 * new: color schemes. 4 default configurations you can customize: dark, gray, white, blue. Add your own color scheme. 
-* tweak: arrow images are removed, now are css based
-* tweak: change style system, use .less instead .css
-* tweak: files restructured
-* some bugfixes and code enhancements
+* tweak: added npm, grunt and bower in order to automatize and build all scripts
+* tweak: changed code structure, now based on prototypes.
+* tweak: move from css to .less
+* tweak: files restructured /src -> /dist
+* tweak: new responsive project page (demo) with all new features documented.
+* tweak: new logo design
+* some bugfixes and performance issues solved.
 
 
 ### v1.2.0 (01.02.2011)
