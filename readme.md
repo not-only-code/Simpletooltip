@@ -5,21 +5,17 @@
 
 ## Features
 
-* Jquery based
-* Minimal configuration
-* 12 functional positions
+* minimal configuration
+* highly customizable: options and themes
 * no extra html structures, use "title" attribute
+* 12 functional positions
 * cross-browser
-* lightweight and fast download, less than 8Kb
+* lightweight: less than 7Kb
 
 ## Build
 
 ```
 $ npm install
-```
-
-```
-$ bower install
 ```
 
 ```
@@ -66,7 +62,7 @@ Simpletooltip is thought for use small and descriptive texts replacing the origi
 ```
 
 
-## Parameters
+## Options
 
 attribute          | description                                      | values                                                                                                                                 | default
 -------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|----------
@@ -92,7 +88,7 @@ To add the desired position, add a `position` data attribute:
 ```
 
 
-## Color Themes
+## Themes
 
 Simpletooltip has 4 color themes, the default theme is seablue, you can choose: blue, gray, dark, white.
 

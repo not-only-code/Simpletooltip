@@ -211,6 +211,11 @@ h2 a:visited {
   text-decoration: none;
   color: #6f9d31;
 }
+h3 {
+  font: bolder 1.7em/1em Helvetica, Arial, sans-serif;
+  text-shadow: none;
+  color: #777;
+}
 p,
 li {
   margin-left: 0;
@@ -429,7 +434,7 @@ a.button:visited {
   left: 0;
   right: 0;
   z-index: 50;
-  background-color: #6d7988;
+  background: #6d7988;
   overflow: hidden;
   height: 0 !important;
 }
@@ -452,10 +457,21 @@ a.button:visited {
   }
 }
 #menu ul {
+  position: relative;
   width: 100%;
   height: 100%;
   margin: 0;
   display: table;
+}
+#menu ul:before {
+  content: '';
+  display: block;
+  position: absolute;
+  background: url('../images/simpletooltip-logo-small.png') no-repeat;
+  width: 50px;
+  height: 40px;
+  top: 6px;
+  left: -55px;
 }
 #menu ul li {
   display: table-cell;
@@ -515,10 +531,17 @@ ul li {
   list-style-position: inside;
   list-style-type: disc;
 }
-.features h2 {
+ol {
+  margin-bottom: 30px;
+}
+ol li {
+  margin-left: 25px;
+  list-style-type: decimal;
+}
+#features h2 {
   float: left;
 }
-.features ul {
+#features ul {
   color: #777;
   float: left;
   white-space: nowrap;
@@ -526,24 +549,20 @@ ul li {
   margin: 0 10px;
   font: bold 1.3em/1.35em Helvetica, Arial, Sans-serif;
 }
-.features ul li {
+#features ul li {
   list-style-type: none;
   line-height: 1em;
   margin-bottom: 9px;
 }
-.features ul li::before {
+#features ul li::before {
   content: "•";
   margin-right: 8px;
 }
 @media only screen and (min-width: 768px) and (max-width: 950px) {
-  .features ul {
+  #features ul {
     white-space: inherit;
     margin-right: 250px;
   }
-}
-.features-image {
-  float: right;
-  margin-right: 20px;
 }
 p:last-child,
 * > p:last-child {
@@ -556,7 +575,7 @@ p:last-child,
   border-collapse: collapse;
   vertical-align: middle;
   border-spacing: 0;
-  margin: 30px 0;
+  margin-bottom: 30px;
 }
 .datasheet strong {
   font-style: normal;
@@ -566,6 +585,7 @@ p:last-child,
   text-align: left;
   padding: 6px 8px;
   vertical-align: middle;
+  border-left: solid 1px #bbb;
 }
 .datasheet th:first-child,
 .datasheet td:first-child {
@@ -646,12 +666,37 @@ footer section:last-child {
 footer section .social {
   display: block;
   float: right;
+  position: relative;
   clear: both;
-  padding: .3em 2em .3em !important;
+  top: -5px;
+  padding: .2em 2em .2em !important;
+  margin-bottom: 15px !important;
 }
-footer section .social.github {
-  margin-top: 90px;
-  margin-bottom: 15px;
+footer section .social.github img {
+  position: relative;
+  top: -1px;
+}
+footer section .social.jquery img {
+  position: relative;
+  top: 2px;
+}
+@media only screen and (max-width: 680px) {
+  footer section .social {
+    float: none;
+    display: inline-block;
+    top: 0;
+    margin-bottom: 30px !important;
+  }
+}
+@media only screen and (max-width: 520px) {
+  footer section .social {
+    padding: .2em 1em .2em !important;
+  }
+}
+@media only screen and (max-width: 680px) {
+  footer section {
+    text-align: center;
+  }
 }
 footer a:link,
 footer a:active,
@@ -664,6 +709,7 @@ footer a:hover {
   color: #ffb733;
 }
 footer h2 {
+  width: 100%;
   font-size: 4.2em;
   line-height: 1.5em;
   margin-bottom: 15px;
