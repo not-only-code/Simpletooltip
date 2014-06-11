@@ -185,6 +185,14 @@ h4 {
   text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5), 1px 1px 0 rgba(255, 255, 255, 0.7);
   color: white;
 }
+@media only screen and (max-width: 480px) {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: 3em;
+  }
+}
 * {
   outline: none !important;
 }
@@ -194,7 +202,7 @@ a:visited {
   color: #409100;
 }
 a:hover {
-  color: #977400;
+  color: #cc8400;
 }
 h2 a:link,
 h2 a:active,
@@ -334,8 +342,7 @@ a.button:visited {
 }
 /* Structure Styles
 -------------------------------------------------------------- */
-#header,
-footer {
+#header {
   height: 150px;
   background-color: #6d7988;
   color: #eaeaea;
@@ -344,27 +351,39 @@ footer {
 .wrapper,
 #content {
   width: 80%;
+  max-width: 960px;
   margin: 0 auto;
   height: 200px;
 }
 #header h1 {
   display: inline-block;
-  margin: 60px 0 20px 0;
+  margin-top: 60px;
   padding-right: 5px;
   padding-left: 90px;
   font-size: 4.2em;
   color: #e8f3f6;
   line-height: 1.5em;
-  text-shadow: 1px 3px 1px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 3px 1px rgba(0, 0, 0, 0.2);
   background: url(../images/simpletooltip-logo.png) no-repeat 0 10px;
 }
-#header a.jquery {
+@media only screen and (max-width: 480px) {
+  #header h1 {
+    font-size: 3.5em;
+    line-height: 1.8em;
+  }
+}
+#header a.social {
   display: block;
   width: auto;
   height: auto;
   overflow: hidden;
   float: right;
-  margin: 20px 20px 0 0;
+  margin: 85px 0 0 15px;
+}
+@media only screen and (max-width: 680px) {
+  #header a.social {
+    display: none;
+  }
 }
 #content {
   position: relative;
@@ -373,17 +392,21 @@ footer {
 }
 #downloadpanel {
   position: absolute;
-  top: 0px;
+  top: 10px;
   right: 3px;
   width: 210px;
   height: auto;
-  margin-right: 20px;
   padding: 20px;
   -webkit-border-radius: .6em;
   -moz-border-radius: .6em;
   border-radius: .6em;
   background-color: rgba(232, 243, 246, 0.8);
   overflow: hidden;
+}
+@media only screen and (max-width: 768px) {
+  #downloadpanel {
+    display: none;
+  }
 }
 #downloadpanel .button {
   padding: .5em 0px;
@@ -400,18 +423,75 @@ footer {
   margin-bottom: 0;
 }
 /*------------- content -------------*/
+#menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: #6d7988;
+  overflow: hidden;
+  height: 0 !important;
+}
+#menu.affix {
+  position: fixed;
+  display: block;
+  height: 50px !important;
+}
+@media only screen and (max-width: 480px) {
+  #menu {
+    display: none !important;
+  }
+}
+#menu .wrapper {
+  height: 100%;
+}
+@media only screen and (max-width: 768px) {
+  #menu .wrapper {
+    width: 100%;
+  }
+}
+#menu ul {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: table;
+}
+#menu ul li {
+  display: table-cell;
+  height: 100%;
+  margin: 0;
+}
+#menu ul li a {
+  height: 100%;
+  text-align: center;
+  color: #e8f3f6;
+  text-decoration: none;
+  font: normal 1.1em/2.8em Helvetica, Arial, Sans-serif;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
+  display: block;
+  position: relative;
+  width: auto;
+}
+#menu ul li a:hover {
+  color: #70d5ff;
+}
+@media only screen and (max-width: 620px) {
+  #menu ul li a {
+    font-size: 0.9em;
+    line-height: 3.3em;
+  }
+}
+#menu ul li.active a {
+  background-color: #56606c;
+}
+#menu ul li.active a:hover {
+  color: #e8f3f6;
+}
 section {
   position: relative;
   overflow: hidden;
   margin-bottom: 40px;
-  /*
-		-moz-column-count: 3;
-	-moz-column-gap: 20px;
-	-webkit-column-count: 3;
-	-webkit-column-gap: 20px;
-	column-count: 3;
-	column-gap: 20px;
-*/
 }
 .icon-markup h2 {
   display: block;
@@ -444,7 +524,22 @@ ul li {
   white-space: nowrap;
   clear: left;
   margin: 0 10px;
-  font: bold 1.3em/1.5em Helvetica, Arial, Sans-serif;
+  font: bold 1.3em/1.35em Helvetica, Arial, Sans-serif;
+}
+.features ul li {
+  list-style-type: none;
+  line-height: 1em;
+  margin-bottom: 9px;
+}
+.features ul li::before {
+  content: "•";
+  margin-right: 8px;
+}
+@media only screen and (min-width: 768px) and (max-width: 950px) {
+  .features ul {
+    white-space: inherit;
+    margin-right: 250px;
+  }
 }
 .features-image {
   float: right;
@@ -471,8 +566,6 @@ p:last-child,
   text-align: left;
   padding: 6px 8px;
   vertical-align: middle;
-  border-left: solid 1px #bbb;
-  border-bottom: solid 1px #bbb;
 }
 .datasheet th:first-child,
 .datasheet td:first-child {
@@ -494,8 +587,8 @@ p:last-child,
   font: italic 14px/1.8em Georgia, Times, Serif;
   font-weight: bold;
 }
-.datasheet tr:nth-child(odd) td {
-  background-color: rgba(255, 255, 255, 0.25);
+.datasheet tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 /* -------- examples  ------- */
 .example.grid {
@@ -524,7 +617,7 @@ p:last-child,
   display: inline-block;
   font: bold 2em/1em Helvetica, Arial, Sans-serif;
   text-shadow: none;
-  color: #333;
+  color: #666;
   margin: 0;
 }
 .example img {
@@ -534,15 +627,31 @@ p:last-child,
 /* -------- footer   ------- */
 footer {
   height: auto;
-  margin: 0;
   font: normal 1em/1.2em Helvetica, Arial, Sans-serif;
   color: white;
   background-color: #756e64;
   text-shadow: none;
 }
 footer .wrapper {
+  height: auto;
   padding: 20px 0;
   padding-bottom: 40px;
+}
+footer section {
+  position: relative;
+}
+footer section:last-child {
+  margin-bottom: 0;
+}
+footer section .social {
+  display: block;
+  float: right;
+  clear: both;
+  padding: .3em 2em .3em !important;
+}
+footer section .social.github {
+  margin-top: 90px;
+  margin-bottom: 15px;
 }
 footer a:link,
 footer a:active,
@@ -565,7 +674,7 @@ footer h2 a:active,
 footer h2 a:visited,
 footer h2 a:hover {
   color: #e8f3f6;
-  text-shadow: 1px 3px 1px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 3px 1px rgba(0, 0, 0, 0.2);
 }
 footer p {
   color: #e8f3f6;

@@ -19,7 +19,7 @@
 @title-color: #6f9d31;
 @link-color: darken(#4baa00, 5%);
 @code-text-color: #6e614d;
-@link-color-hover: #977400;
+@link-color-hover: darken(orange, 10%);
 
 @using-ieclasses: true;		// whether or not the markup has html5-boilerplate style IE classes in it or not
 @using-modernizr: true; 	// whether or not modernizer feature-detection classes are being used
@@ -65,6 +65,10 @@ h1,h2,h3,h4 {
 	text-shadow: -1px -1px 0 rgba(0, 0 , 0, 0.5),
 				  1px 1px 0 rgba(255, 255, 255, 0.7);
 	color: white;
+
+	@media only screen and (max-width: 480px) {
+		font-size: 3em;
+	}
 }
 
 * {
@@ -245,8 +249,7 @@ a.button {
 /* Structure Styles
 -------------------------------------------------------------- */
 
-#header,
-footer {
+#header {
 	height: 150px;
 	background-color: #6d7988;
 	color: #eaeaea;
@@ -256,29 +259,39 @@ footer {
 .wrapper,
 #content {
 	width: 80%;
+	max-width: 960px;
 	margin: 0 auto;
 	height: 200px;
 }
 
 #header h1 {
 	display: inline-block;
-	margin: 60px 0 20px 0;
+	margin-top: 60px;
 	padding-right: 5px;
 	padding-left: 90px;
 	font-size: 4.2em;
 	color: #e8f3f6;
 	line-height: 1.5em;
-	text-shadow: 1px 3px 1px rgba(0,0,0,.4);
-	background: url(../images/simpletooltip-logo.png) no-repeat 0 10px;
+	text-shadow: 1px 3px 1px rgba(0,0,0,.2);
+	background: url(../images/simpletooltip-logo.png) no-repeat 0 10px;	
+
+	@media only screen and (max-width: 480px) {
+		font-size: 3.5em;
+		line-height: 1.8em;
+	}
 }
 
-#header a.jquery {
+#header a.social {
 	display: block;
 	width: auto;
 	height: auto;
 	overflow: hidden;
 	float: right;
-	margin: 20px 20px 0 0;
+	margin: 85px 0 0 15px;
+
+	@media only screen and (max-width: 680px) {
+		display: none;
+	}
 }
 
 #content {
@@ -289,17 +302,20 @@ footer {
 
 #downloadpanel {
 	position: absolute;
-	top: 0px;
+	top: 10px;
 	right: 3px;
 	width: 210px;
 	height: auto;
-	margin-right: 20px;
 	padding: 20px;
 	-webkit-border-radius: .6em; 
 	-moz-border-radius: .6em;
 	border-radius: .6em;
 	background-color: fadeout(#e8f3f6, 20%);
 	overflow: hidden;
+
+	@media only screen and (max-width: 768px) {
+		display: none;
+	}
 }
 
 #downloadpanel .button {
@@ -322,18 +338,81 @@ footer {
 
 /*------------- content -------------*/
 
+#menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 50;
+	background-color: #6d7988;
+	overflow: hidden;
+	height: 0 !important;
+
+	&.affix {
+		position: fixed;
+		display: block;
+		height: 50px !important;
+	}
+
+	@media only screen and (max-width: 480px) {
+		display: none !important;
+	}
+
+	.wrapper {
+		height: 100%;
+
+		@media only screen and (max-width: 768px) {
+			width: 100%;
+		}
+	}
+
+	ul {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		display: table;
+
+		li {
+			display: table-cell;
+			height: 100%;
+			margin: 0;
+
+			a {
+				height: 100%;
+				text-align: center;
+				color: #e8f3f6;
+				text-decoration: none;
+				font: normal 1.1em/2.8em Helvetica, Arial, Sans-serif;
+				text-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
+				display: block;
+				position: relative;
+				width: auto;
+
+				&:hover {
+					color: lighten(#0085bc, 35%);
+				}
+
+				@media only screen and (max-width: 620px) {
+					font-size: 0.9em;
+					line-height: 3.3em;
+				}
+			}
+
+			&.active a {
+				background-color: darken(#6d7988, 10%);
+
+				&:hover {
+					color: #e8f3f6;
+				}
+			}
+		}
+	}
+}
+
 section {
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 40px;
-/*
-		-moz-column-count: 3;
-	-moz-column-gap: 20px;
-	-webkit-column-count: 3;
-	-webkit-column-gap: 20px;
-	column-count: 3;
-	column-gap: 20px;
-*/
 }
 
 .icon-markup h2 {
@@ -373,7 +452,24 @@ ul li {
 	white-space: nowrap;
 	clear: left;
 	margin: 0 10px;
-	font: bold 1.3em/1.5em Helvetica, Arial, Sans-serif;
+	font: bold 1.3em/1.35em Helvetica, Arial, Sans-serif;
+
+	li {
+		list-style-type: none;
+		line-height: 1em;
+		margin-bottom: 9px;
+
+		&::before {
+			content: "•";
+			margin-right: 8px;
+		}
+
+	}
+
+	@media only screen and (min-width: 768px) and (max-width: 950px) {
+		white-space: inherit;
+		margin-right: 250px;
+	}
 }
 
 .features-image {
@@ -407,8 +503,8 @@ p:last-child,
   		text-align: left;
  		padding: 6px 8px;
  		vertical-align: middle;
- 		border-left: solid 1px #bbb;
- 		border-bottom: solid 1px #bbb;
+ 		//border-left: solid 1px #bbb;
+ 		//border-bottom: solid 1px #bbb;
 	}
 
 	th:first-child,
@@ -436,8 +532,8 @@ p:last-child,
 		font-weight: bold;
 	}
 	
-	tr:nth-child(odd) td {
-		background-color: fade(white, 25%);
+	tbody tr:nth-child(odd) {
+		background-color: fade(white, 30%);
 	}
 }
 
@@ -473,7 +569,7 @@ p:last-child,
 	display: inline-block;
 	font: bold 2em/1em Helvetica, Arial, Sans-serif;
 	text-shadow: none;
-	color: #333;
+	color: #666;
 	margin: 0;
 }
 .example img {
@@ -485,7 +581,6 @@ p:last-child,
 
 footer {
 	height: auto;
-	margin: 0;
 
 	font: normal 1em/1.2em Helvetica, Arial, Sans-serif;
 	color: white;
@@ -493,8 +588,30 @@ footer {
 	text-shadow: none;
 
 	.wrapper {
+		height: auto;
 		padding: 20px 0;
 		padding-bottom: 40px;
+	}
+
+	section {
+
+		position: relative;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.social {
+			display: block;
+			float: right;
+			clear: both;
+			padding: .3em 2em .3em !important;
+
+			&.github {
+				margin-top: 90px;
+				margin-bottom: 15px;
+			}
+		}
 	}
 
 	a {
@@ -524,7 +641,7 @@ footer {
 			&:visited,
 			&:hover {
 				color: #e8f3f6;
-				text-shadow: 1px 3px 1px rgba(0,0,0,.4);
+				text-shadow: 1px 3px 1px rgba(0,0,0,.2);
 			}
 		}
 	}
