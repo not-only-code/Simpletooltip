@@ -203,7 +203,7 @@ If this plugin helped you, any [donation](https://www.paypal.com/cgi-bin/webscr?
 
 ## Changelog
 
-**v1.3.0 (13.06.2014)**
+**v1.3.0 (11.06.2014)**
 
 * new: parameters. You can pass some parameters to adjust size, border, colors, animation, arrow size, etc.
 * new: color schemes. 4 default configurations you can customize: dark, gray, white, blue. Add your own color scheme. 
