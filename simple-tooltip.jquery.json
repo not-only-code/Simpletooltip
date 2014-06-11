@@ -1,5 +1,5 @@
 {
-  "name": "simpletooltip",
+  "name": "simple-tooltip",
   "title": "Simpletooltip",
   "description": "Simpletooltip is a JQuery plugin, thought to insert short tooltips to any element of your website more easily",
   "keywords": ["tooltip"],
@@ -22,9 +22,9 @@
       "url": "http://opensource.org/licenses/GPL-3.0"
     }
   ],
-  "homepage": "http://not-only-code.github.com/Simpletooltip",
+  "homepage": "http://not-only-code.github.io/Simpletooltip",
   "docs": "https://github.com/not-only-code/Simpletooltip",
   "dependencies": {
-    "jquery": ">=1.7"
+    "jquery": ">=1.8"
   }
 }
